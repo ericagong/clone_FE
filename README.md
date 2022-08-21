@@ -22,8 +22,8 @@
 
 [x] create
 [x] read
-[ ] update
-[ ] delete
+[x] update
+[x] delete
 
 [x] like
 [x] unlike
