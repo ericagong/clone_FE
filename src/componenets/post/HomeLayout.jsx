@@ -1,30 +1,53 @@
-// import styled from "styled-components";
+import { useSelector } from "react-redux";
 
-// import { H1 } from "../styled/Hn";
-// import Posts from "./Posts";
+import MiniUser from "../common/MiniUser";
+import MiniLogin from "../common/MiniLogin";
+import Create from "./Create";
+import Posts from "./Posts";
+import SearchBar from "../../elements/SearchBar";
+import Rank from "../../componenets/common/Rank";
+import styled from "styled-components";
 
-// const HomeLayout = (props) => {
-//   return (
-//     <Wrapper>
-//       <TitleWrapper>
-//         <H1>Home</H1>
-//       </TitleWrapper>
-//       <Posts />
-//     </Wrapper>
-//   );
-// };
+const HomeLayout = (props) => {
+  const isLogin = useSelector((state) => state.user.isLogin);
 
-// export default HomeLayout;
+  return (
+    <StHomeLayout>
+      <div id="left">
+        {/* <div>left</div> */}
+        {isLogin ? <MiniUser /> : <MiniLogin />}
+      </div>
+      <div id="center">
+        {/* <div>center</div> */}
+        <Create />
+        <Posts />
+      </div>
+      <div id="right">
+        {/* <div>right</div> */}
+        <SearchBar />
+        <Rank />
+      </div>
+    </StHomeLayout>
+  );
+};
 
-// const Wrapper = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   margin-top: 50px;
-//   box-sizing: border-box;
-// `;
+export default HomeLayout;
 
-// const TitleWrapper = styled.div`
-//   box-sizing: border-box;
-//   padding-bottom: 30px;
-// `;
+const StHomeLayout = styled.div`
+  /* background-color: pink; */
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  #left {
+    /* background-color: royalblue; */
+    width: 240px;
+  }
+  #center {
+    /* background-color: tomato; */
+    width: 500px;
+  }
+  #right {
+    /* background-color: peachpuff; */
+    width: 210px;
+  }
+`;

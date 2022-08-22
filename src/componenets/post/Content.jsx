@@ -6,6 +6,7 @@ import { apis } from "../../shared/axios";
 import RESP from "../../server/response";
 import { parseHashtags, notEmptyCheck } from "../../shared/regex";
 import LikeBtn from "../../elements/LikeBtn";
+import CommentsLayout from "../comment/CommentsLayout";
 
 // TODO 중복 해시태그?
 // TODO reducer C, U, D 연결
@@ -207,8 +208,8 @@ const Content = ({
               <form onSubmit={handleSubmit(submitForm)}>
                 <div>
                   <input
-                    type='text'
-                    id='editContent'
+                    type="text"
+                    id="editContent"
                     {...register("editContent", {
                       required: "You should write content to edit post.",
                       maxLength: {
@@ -227,8 +228,8 @@ const Content = ({
                     <div>{errors.editContent.message}</div>
                   ) : null}
                 </div>
-                <button type='submit'>Save Post</button>
-                <button type='button' onClick={toggleEdit}>
+                <button type="submit">Save Post</button>
+                <button type="button" onClick={toggleEdit}>
                   Cancel
                 </button>
               </form>
@@ -241,11 +242,11 @@ const Content = ({
             </div>
             <div>
               {!showComment ? (
-                <button type='button' onClick={toggleComment}>
+                <button type="button" onClick={toggleComment}>
                   Show Comments
                 </button>
               ) : (
-                <button type='button' onClick={toggleComment}>
+                <button type="button" onClick={toggleComment}>
                   Hide Comments
                 </button>
               )}
@@ -253,32 +254,32 @@ const Content = ({
             </div>
             <div>
               {!showMore ? (
-                <button type='button' onClick={toggleMore}>
+                <button type="button" onClick={toggleMore}>
                   Show more
                 </button>
               ) : (
-                <button type='button' onClick={toggleMore}>
+                <button type="button" onClick={toggleMore}>
                   Hide
                 </button>
               )}
               {showMore ? (
                 <div>
                   {!ismine && !isFollowing ? (
-                    <button type='button' onClick={toggleFollow}>
+                    <button type="button" onClick={toggleFollow}>
                       Follow this user
                     </button>
                   ) : null}
                   {!ismine && isFollowing ? (
-                    <button type='button' onClick={toggleFollow}>
+                    <button type="button" onClick={toggleFollow}>
                       Unfollow this user
                     </button>
                   ) : null}
                   {ismine ? (
                     <div>
-                      <button type='button' onClick={toggleEdit}>
+                      <button type="button" onClick={toggleEdit}>
                         Edit this post
                       </button>
-                      <button type='button' onClick={clickDelete}>
+                      <button type="button" onClick={clickDelete}>
                         Delete this post
                       </button>
                     </div>
@@ -289,7 +290,7 @@ const Content = ({
           </div>
           <div>
             <div style={{ marginBottom: "30px" }}>
-              {showComment ? <div>Comments List!</div> : null}
+              {showComment ? <CommentsLayout /> : null}
             </div>
           </div>
         </div>

@@ -1,63 +1,72 @@
-// import { useSelector } from "react-redux";
-// import { useState, useEffect } from "react";
-// import { useParams, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import styled from "styled-components";
 
-// import styled from "styled-components";
-// import axios from "axios";
+import RESP from "../../server/response";
+import { apis } from "../../shared/axios";
+import Comment from "./Comment";
 
-// import Comment from "./Comment";
+const Comments = (props) => {
+  const [currPageNum, setCurrPageNum] = useState(1);
+  const [allComments, setAllComments] = useState([]);
+  const [pageInfo, setPageInfo] = useState({
+    currpage: 0,
+    totalpage: 0,
+    currcontent: 0,
+    totalelements: 0,
+  });
 
-// const Comments = (props) => {
-//   const fetchWatcher = useSelector((state) => state.comment.fetchWatcher);
+  const getComments = async (postId, pageNum, pageLimit) => {
+    // const resp = await apis.get_comments(postId, pageNum, pageLimit);
+    // const { result, statue:{message}, output} = resp.data
 
-//   const [comments, setComments] = useState([]);
+    //success
+    const {
+      result,
+      status: { message },
+      output,
+    } = RESP.COMMENT.GET_SUCCESS;
 
-//   const { id } = useParams();
+    //fail
+    // const {
+    //   result,
+    //   status:{message},
+    //   output,
+    // } = RESP.COMMENT.GET_FAIL
 
-//   const navigate = useNavigate();
+    if (!result) {
+      alert(message);
+      return;
+    }
 
-//   // TODO 에러 발생 시 홈으로 갈건지?
-//   const getComments = async (commentsNum, pageLimit) => {
-//     const {
-//       data: { result, data },
-//     } = await axios.get(
-//       `http://3.34.47.86/api/post/${id}/comments?commentsNum=${commentsNum}&pageLimit=${pageLimit}`,
-//       {
-//         headers: {
-//           Authorization: localStorage.getItem("AccessToken"),
-//           RefreshToken: localStorage.getItem("RefreshToken"),
-//         },
-//       }
-//     );
+    const { comments, ...rest } = output;
 
-//     // const { result, data } = RESP.GET_COMMENTS_SUCCESS;
+    setAllComments([...allComments, ...comments]);
+    setPageInfo({ pageInfo, ...rest });
+  };
 
-//     if (!result) {
-//       navigate("/home");
-//       return;
-//     }
+  useEffect(() => {
+    getComments();
+  }, []);
 
-//     setComments([...data]);
-//   };
+  const commentList = allComments.map((comment) => (
+    <Comment key={comment.id} {...comment} />
+  ));
 
-//   useEffect(() => {
-//     const commentsNum = 0;
-//     const pageLimit = 10;
-//     getComments(commentsNum, pageLimit);
-//   }, [fetchWatcher]);
+  return (
+    <StComments>
+      <p className="comments_header">{pageInfo.totalelements}개 Comments</p>
+      <div>{commentList}</div>
+    </StComments>
+  );
+};
 
-//   const allComments = comments.map((comment) => (
-//     <Comment key={comment.id} {...comment} postId={id} />
-//   ));
+export default Comments;
 
-//   return <CommentsWrapper>{allComments}</CommentsWrapper>;
-// };
-
-// export default Comments;
-
-// const CommentsWrapper = styled.div`
-//   width: 70%;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: flex-start;
-// `;
+const StComments = styled.div`
+  width: 416px;
+  /* height: 200px; */
+  /* background-color: royalblue; */
+  .comments_header {
+    border-bottom: 1px solid;
+  }
+`;

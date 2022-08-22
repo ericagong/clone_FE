@@ -1,147 +1,94 @@
-// import { useForm } from "react-hook-form";
-// import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
-// import { useDispatch } from "react-redux";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { useNavigate, Link } from "react-router-dom";
 
-// import styled from "styled-components";
-// import RESP from "../../server/response";
+import { SIGNUP_PATH } from "../../shared/paths";
+import RESP from "../../server/response";
+import { apis } from "../../shared/axios";
+import { login } from "../../modules/redux/user";
+import { HOME_PATH } from "../../shared/paths";
 
-// import axios from "axios";
-// import { login } from "../../modules/redux/user";
+const Login = (props) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ mode: "onChange" });
 
-// import { H3, H4_ERR } from "../styled/Hn";
-// import Button from "../../elements/Button";
+  const dispatch = useDispatch();
 
-// // TODO id 저장하시겠습니까? 로컬 스토리지 저장하고 그렇지 않은 경우는 쿠키 저장?
-// // TODO 아이디 및 패스워드 유효성 검사?
-// const Login = (props) => {
-//   const {
-//     register,
-//     handleSubmit,
-//     formState: { errors },
-//   } = useForm();
+  const navigate = useNavigate();
 
-//   const [userInfo, setUserInfo] = useState({
-//     username: "",
-//     password: "",
-//   });
+  const onSubmitHandler = async ({ email, password }) => {
+    // const resp = await apis.login(email, password);
+    // const {
+    //   result,
+    //   status: { message },
+    // } = resp.data;
 
-//   const navigate = useNavigate();
+    // // TODO check Authorization or authorization
+    // const { authorization } = resp.headers;
 
-//   const dispatch = useDispatch();
+    // success
+    const {
+      result,
+      status: { message },
+    } = RESP.AUTH.LOGIN_SUCCESS;
 
-//   const onChangeHandler = (e) => {
-//     const name = e.target.name;
-//     const value = e.target.value;
-//     setUserInfo({ ...userInfo, [name]: value });
-//   };
+    const { Authorization } = RESP.AUTH.LOGIN_HEADER;
 
-//   const onSubmitHandler = async (formData) => {
-//     // console.log(formData);
+    // fail
+    // const {
+    //   result,
+    //   status: { message },
+    // } = RESP.AUTH.LOGIN_FAIL;
 
-//     const {
-//       headers: { authorization, refreshtoken },
-//       data: {
-//         result,
-//         status: { message },
-//       },
-//     } = await axios.post(`http://3.34.47.86/user/login`, formData);
+    // TODO 하단 모달로 처리
+    if (!result) {
+      alert(message);
+      return;
+    }
 
-//     // const {
-//     //   result,
-//     //   status: { message },
-//     // } = RESP.LOGIN_SUCCESS;
+    // TODO check Authorization or authorization
+    localStorage.setItem("AccessToken", Authorization);
 
-//     // const { Authorization, RefreshToken } = RESP.LOGIN_HEADER;
+    dispatch(login());
 
-//     if (!result) {
-//       alert(message);
-//       return;
-//     }
+    navigate(HOME_PATH);
+  };
 
-//     localStorage.setItem("AccessToken", authorization);
-//     localStorage.setItem("RefreshToken", refreshtoken);
+  return (
+    <>
+      <Link to={SIGNUP_PATH}>
+        <div>Go Signup</div>
+      </Link>
+      <form onSubmit={handleSubmit(onSubmitHandler)}>
+        <div>
+          <label htmlFor='email'>email</label>
+          <input
+            type='text'
+            id='email'
+            {...register("email", {
+              required: "You should write email.",
+            })}
+          />
+          {errors.email ? <div>{errors.email.message}</div> : null}
+        </div>
+        <div>
+          <label htmlFor='password'>password</label>
+          <input
+            type='password'
+            id='password'
+            {...register("password", {
+              required: "You should write password",
+            })}
+          />
+          {errors.password ? <div>{errors.password.message}</div> : null}
+        </div>
+        <button type='submit'>Sign in</button>
+      </form>
+    </>
+  );
+};
 
-//     dispatch(login());
-
-//     navigate("/home");
-//   };
-
-//   return (
-//     <Form onSubmit={handleSubmit(onSubmitHandler)}>
-//       <FormWrapper>
-//         <H3 as='label' htmlFor='username'>
-//           ID
-//         </H3>
-//         <InputWrapper>
-//           <Input
-//             {...register("username", {
-//               required: "You should write ID for login.",
-//             })}
-//             type='text'
-//             onChange={onChangeHandler}
-//           />
-//         </InputWrapper>
-//         {errors?.username ? (
-//           <ErrorWrapper>
-//             <H4_ERR>{errors.username.message}</H4_ERR>
-//           </ErrorWrapper>
-//         ) : null}
-//         <H3 as='label' htmlFor='password'>
-//           Password
-//         </H3>
-//         <InputWrapper>
-//           <Input
-//             {...register("password", {
-//               required: "You should write password for login.",
-//             })}
-//             type='password'
-//             id='password'
-//             onChange={onChangeHandler}
-//           />
-//         </InputWrapper>
-//         {errors?.password ? (
-//           <ErrorWrapper>
-//             <H4_ERR>{errors.password.message}</H4_ERR>
-//           </ErrorWrapper>
-//         ) : null}
-//       </FormWrapper>
-//       <Button type='submit' size='lg' content='Login' />
-//     </Form>
-//   );
-// };
-
-// export default Login;
-
-// const Form = styled.form`
-//   width: 70%;
-//   height: 100%;
-//   margin: auto;
-//   display: flex;
-//   flex-direction: column;
-//   flex-wrap: nowrap;
-//   align-items: flex-start;
-//   box-sizing: border-box;
-//   padding-left: 10%;
-// `;
-
-// const FormWrapper = styled.div`
-//   display: flex;
-//   align-items: flex-start;
-//   flex-direction: column;
-//   margin-bottom: 10px;
-// `;
-
-// const InputWrapper = styled.div`
-//   box-sizing: border-box;
-//   padding: 5px 0px;
-// `;
-
-// const Input = styled.input`
-//   width: 100%;
-// `;
-
-// const ErrorWrapper = styled.div`
-//   box-sizing: border-box;
-//   padding: 0px 0px 20px;
-// `;
+export default Login;

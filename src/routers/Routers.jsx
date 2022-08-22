@@ -16,6 +16,7 @@ const Routers = (props) => {
         <Route path='/signup' element={<Signup />} />
         <Route path='/' element={<Home />} />
         <Route path='/home' element={<Home />} />
+        <Route path='/profile/' element={<Profile />} />
         <Route path='/profile/:username' element={<Profile />} />
         <Route path='/search/:hashtag' element={<SearchResult />} />
         <Route path='*' element={<NotFound />} />

@@ -5,6 +5,7 @@ import { apis } from "../../shared/axios";
 import RESP from "../../server/response";
 import { logout } from "../../modules/redux/user";
 import UserProfile from "../../elements/UserProfile";
+import styled from "styled-components";
 
 // TODO check cookie issue after axios connection.
 const MiniUser = (props) => {
@@ -84,11 +85,11 @@ const MiniUser = (props) => {
   };
 
   return (
-    <>
-      <div>
-        <UserProfile userprofile={info.userprofile} />
-        <div>{info.username}</div>
-        <button type='button' onClick={onLogoutHandler}>
+    <StMiniUser>
+      <div className="profile_wrap">
+        <UserProfile userprofile={info.userprofile} className="user_img" />
+        <div className="name">{info.username}</div>
+        <button type="button" onClick={onLogoutHandler}>
           Logout
         </button>
       </div>
@@ -106,8 +107,28 @@ const MiniUser = (props) => {
           <div>{info.numfollowers}</div>
         </div>
       </div>
-    </>
+    </StMiniUser>
   );
 };
 
 export default MiniUser;
+
+const StMiniUser = styled.div`
+  width: 270px;
+  height: 150px;
+  /* background-color: royalblue; */
+  border: 1px solid #eee;
+  box-shadow: rgb(50 50 93 / 25%) 0px 4px 16px 0px;
+  box-sizing: border-box;
+  border-top: 0;
+  .profile_wrap {
+    display: flex;
+    background-color: pink;
+    .user_img {
+    }
+    .name {
+    }
+    button {
+    }
+  }
+`;
