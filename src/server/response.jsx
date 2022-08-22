@@ -555,7 +555,7 @@ const RESP = {
       result: true,
       status: {
         code: 200,
-        message: "Follow username.",
+        message: "Successfully get info.",
       },
       output: {
         username: "erica",
@@ -586,8 +586,8 @@ const RESP = {
         posts: [
           {
             id: 1,
-            username: "erica",
-            userprofile: "https://joeschmoe.io/api/v1/jane",
+            username: "Eunchae",
+            userprofile: "https://joeschmoe.io/api/v1/eunchae",
             content: "blablablabla. this is content of the post #good #Good",
             imageUrls: [
               "https://img.freepik.com/free-photo/peak-bamboo-lijiang-rural-mist_1417-410.jpg?size=626&ext=jpg",
@@ -605,7 +605,7 @@ const RESP = {
           {
             id: 2,
             username: "Eunchae",
-            userprofile: "https://joeschmoe.io/api/v1/random",
+            userprofile: "https://joeschmoe.io/api/v1/eunchae",
             content: "blablablabla. this is content of the post #good #vibe",
             imageUrls: [
               "https://www.freepik.com/free-vector/summer-forest-landscape-with-lake-night_27576496.htm#query=natural%20scenery&position=5&from_view=keyword",
@@ -621,8 +621,8 @@ const RESP = {
           },
           {
             id: 3,
-            username: "Ash",
-            userprofile: "https://joeschmoe.io/api/v1/random",
+            username: "Eunchae",
+            userprofile: "https://joeschmoe.io/api/v1/eunchae",
             content:
               "blablablabla. this is content of the post #onlytags #hello",
             imageUrls: [],
@@ -636,8 +636,8 @@ const RESP = {
           },
           {
             id: 4,
-            username: "john",
-            userprofile: "https://joeschmoe.io/api/v1/random",
+            username: "Eunchae",
+            userprofile: "https://joeschmoe.io/api/v1/eunchae",
             content: "blablablabla. this is content of the post #onlytags",
             imageUrls: [],
             hashtags: ["#onlytags"],
@@ -651,8 +651,8 @@ const RESP = {
           {
             id: 5,
             username: "test1",
-            userprofile: "https://joeschmoe.io/api/v1/random",
-            content: "blablablabla. this is content of the post.",
+            username: "Eunchae",
+            userprofile: "https://joeschmoe.io/api/v1/eunchae",
             imageUrls: [],
             hashtags: [],
             time: "2022/08/19",
@@ -697,8 +697,8 @@ const RESP = {
           },
           {
             id: 2,
-            username: "Eunchae",
-            userprofile: "https://joeschmoe.io/api/v1/random",
+            username: "erica",
+            userprofile: "https://joeschmoe.io/api/v1/jane",
             content: "blablablabla. this is content of the post #good #vibe",
             imageUrls: [
               "https://www.freepik.com/free-vector/summer-forest-landscape-with-lake-night_27576496.htm#query=natural%20scenery&position=5&from_view=keyword",
@@ -714,8 +714,8 @@ const RESP = {
           },
           {
             id: 3,
-            username: "Ash",
-            userprofile: "https://joeschmoe.io/api/v1/random",
+            username: "erica",
+            userprofile: "https://joeschmoe.io/api/v1/jane",
             content:
               "blablablabla. this is content of the post #onlytags #hello",
             imageUrls: [],
@@ -729,8 +729,8 @@ const RESP = {
           },
           {
             id: 4,
-            username: "john",
-            userprofile: "https://joeschmoe.io/api/v1/random",
+            username: "erica",
+            userprofile: "https://joeschmoe.io/api/v1/jane",
             content: "blablablabla. this is content of the post #onlytags",
             imageUrls: [],
             hashtags: ["#onlytags"],
@@ -743,8 +743,8 @@ const RESP = {
           },
           {
             id: 5,
-            username: "test1",
-            userprofile: "https://joeschmoe.io/api/v1/random",
+            username: "erica",
+            userprofile: "https://joeschmoe.io/api/v1/jane",
             content: "blablablabla. this is content of the post.",
             imageUrls: [],
             hashtags: [],
@@ -758,14 +758,14 @@ const RESP = {
         ],
       },
     },
-    GET_POST_FAIL: {
+    GET_POSTS_FAIL: {
       result: false,
       status: {
         code: 401,
         message: "No right to get posts.",
       },
     },
-    GET_FOLLOWING_SUCCESS: {
+    GET_FOLLOWINGS_SUCCESS: {
       result: true,
       status: {
         code: 200,
@@ -775,42 +775,43 @@ const RESP = {
         currpage: 1,
         totalpage: 2,
         currcontent: 5,
+        totalelements: 50,
         isme: false,
         following: [
           {
-            username: "erica",
-            userpfoile: "https://joeschmoe.io/api/v1/random",
+            username: "maybe",
+            userprfoile: "https://joeschmoe.io/api/v1/random",
             numfollowing: 5,
             numfollowers: 16,
           },
           {
             username: "Eunchae",
-            userpfoile: "https://joeschmoe.io/api/v1/random",
+            userprofile: "https://joeschmoe.io/api/v1/random",
             numfollowing: 5,
             numfollowers: 10,
           },
           {
             username: "john",
-            userpfoile: "https://joeschmoe.io/api/v1/random",
+            userprofile: "https://joeschmoe.io/api/v1/random",
             numfollowing: 50,
             numfollowers: 30,
           },
           {
             username: "test1",
-            userpfoile: "https://joeschmoe.io/api/v1/random",
+            userprofile: "https://joeschmoe.io/api/v1/random",
             numfollowing: 0,
             numfollowers: 0,
           },
           {
             username: "test2",
-            userpfoile: "https://joeschmoe.io/api/v1/random",
+            userprofile: "https://joeschmoe.io/api/v1/random",
             numfollowing: 5,
             numfollowers: 16,
           },
         ],
       },
     },
-    GET_MY_FOLLOWING_SUCCESS: {
+    GET_MY_FOLLOWINGS_SUCCESS: {
       result: true,
       status: {
         code: 200,
@@ -820,42 +821,43 @@ const RESP = {
         currpage: 1,
         totalpage: 2,
         currcontent: 5,
+        totalelements: 50,
         isme: true,
         following: [
           {
-            username: "erica",
-            userpfoile: "https://joeschmoe.io/api/v1/random",
+            username: "maybe",
+            userprofile: "https://joeschmoe.io/api/v1/random",
             numfollowing: 5,
             numfollowers: 16,
           },
           {
             username: "Eunchae",
-            userpfoile: "https://joeschmoe.io/api/v1/random",
+            userprofile: "https://joeschmoe.io/api/v1/random",
             numfollowing: 5,
             numfollowers: 10,
           },
           {
             username: "john",
-            userpfoile: "https://joeschmoe.io/api/v1/random",
+            userprofile: "https://joeschmoe.io/api/v1/random",
             numfollowing: 50,
             numfollowers: 30,
           },
           {
             username: "test1",
-            userpfoile: "https://joeschmoe.io/api/v1/random",
+            userprofile: "https://joeschmoe.io/api/v1/random",
             numfollowing: 0,
             numfollowers: 0,
           },
           {
             username: "test2",
-            userpfoile: "https://joeschmoe.io/api/v1/random",
+            userprofile: "https://joeschmoe.io/api/v1/random",
             numfollowing: 5,
             numfollowers: 16,
           },
         ],
       },
     },
-    GET_FOLLOWING_FAIL: {
+    GET_FOLLOWINGS_FAIL: {
       result: false,
       status: {
         code: 401,
@@ -872,35 +874,36 @@ const RESP = {
         currpage: 1,
         totalpage: 2,
         currcontent: 5,
+        totalelements: 50,
         isme: false,
         followers: [
           {
             username: "erica",
-            userpfoile: "https://joeschmoe.io/api/v1/random",
+            userprofile: "https://joeschmoe.io/api/v1/random",
             numfollowing: 5,
             numfollowers: 16,
           },
           {
             username: "Eunchae",
-            userpfoile: "https://joeschmoe.io/api/v1/random",
+            userprofile: "https://joeschmoe.io/api/v1/random",
             numfollowing: 5,
             numfollowers: 10,
           },
           {
             username: "john",
-            userpfoile: "https://joeschmoe.io/api/v1/random",
+            userprofile: "https://joeschmoe.io/api/v1/random",
             numfollowing: 50,
             numfollowers: 30,
           },
           {
             username: "test1",
-            userpfoile: "https://joeschmoe.io/api/v1/random",
+            userprofile: "https://joeschmoe.io/api/v1/random",
             numfollowing: 0,
             numfollowers: 0,
           },
           {
             username: "test2",
-            userpfoile: "https://joeschmoe.io/api/v1/random",
+            userprofile: "https://joeschmoe.io/api/v1/random",
             numfollowing: 5,
             numfollowers: 16,
           },
@@ -918,34 +921,35 @@ const RESP = {
         totalpage: 2,
         currcontent: 5,
         isme: true,
+        totalelements: 50,
         followers: [
           {
             username: "erica",
-            userpfoile: "https://joeschmoe.io/api/v1/random",
+            userprofile: "https://joeschmoe.io/api/v1/random",
             numfollowing: 5,
             numfollowers: 16,
           },
           {
             username: "Eunchae",
-            userpfoile: "https://joeschmoe.io/api/v1/random",
+            userprofile: "https://joeschmoe.io/api/v1/random",
             numfollowing: 5,
             numfollowers: 10,
           },
           {
             username: "john",
-            userpfoile: "https://joeschmoe.io/api/v1/random",
+            userprofile: "https://joeschmoe.io/api/v1/random",
             numfollowing: 50,
             numfollowers: 30,
           },
           {
             username: "test1",
-            userpfoile: "https://joeschmoe.io/api/v1/random",
+            userprofile: "https://joeschmoe.io/api/v1/random",
             numfollowing: 0,
             numfollowers: 0,
           },
           {
             username: "test2",
-            userpfoile: "https://joeschmoe.io/api/v1/random",
+            userprofile: "https://joeschmoe.io/api/v1/random",
             numfollowing: 5,
             numfollowers: 16,
           },

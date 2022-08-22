@@ -5,6 +5,7 @@ import { apis } from "../../shared/axios";
 import RESP from "../../server/response";
 import { logout } from "../../modules/redux/user";
 import UserProfile from "../../elements/UserProfile";
+import Username from "../../elements/Username";
 
 // TODO check cookie issue after axios connection.
 const MiniUser = (props) => {
@@ -87,7 +88,7 @@ const MiniUser = (props) => {
     <>
       <div>
         <UserProfile userprofile={info.userprofile} />
-        <div>{info.username}</div>
+        <Username isme={true} username={info.username} />
         <button type='button' onClick={onLogoutHandler}>
           Logout
         </button>
