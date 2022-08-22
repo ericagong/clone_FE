@@ -20,7 +20,7 @@ const HomeLayout = (props) => {
       <div id="center">
         {/* <div>center</div> */}
         <Create />
-        <Posts />
+        <Posts onProfile={false} />
       </div>
       <div id="right">
         {/* <div>right</div> */}

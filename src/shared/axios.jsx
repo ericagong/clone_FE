@@ -100,7 +100,7 @@ export const apis = {
     api.get(
       `/api/profile/posts?username=${username}&pageNum=${pageNum}&pageLimit=${pageLimit}`
     ),
-  get_profile_following: (username, pageNum, pageLimit) =>
+  get_profile_followings: (username, pageNum, pageLimit) =>
     api.get(
       `/api/profile/following?username=${username}pageNum=${pageNum}&pageLimit=${pageLimit}`
     ),
