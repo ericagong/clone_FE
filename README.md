@@ -36,7 +36,7 @@
 ### Comment
 
 [ ] create
-[ ] read
+[ X ] read
 [ ] update
 [ ] delete
 

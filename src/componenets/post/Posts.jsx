@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { apis } from "../../shared/axios";
 import RESP from "../../server/response";
 import Post from "./Post";
-
 // TODO dispatch to create
 // TODO infinite scroll 구현 with currPageNum
 const Posts = ({ onProfile, username }) => {

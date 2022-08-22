@@ -89,7 +89,7 @@ const MiniUser = (props) => {
       <div>
         <UserProfile userprofile={info.userprofile} />
         <Username isme={true} username={info.username} />
-        <button type='button' onClick={onLogoutHandler}>
+        <button type="button" onClick={onLogoutHandler}>
           Logout
         </button>
       </div>

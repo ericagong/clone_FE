@@ -1,217 +1,227 @@
-// import { useForm } from "react-hook-form";
-// import { useState } from "react";
-// import { useDispatch } from "react-redux";
+import React from "react";
+import styled from "styled-components";
+import { useSelector } from "react-redux";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { parseHashtags, notEmptyCheck } from "../../shared/regex";
 
-// import styled from "styled-components";
-// import { faPencil, faXmark } from "@fortawesome/free-solid-svg-icons";
-// import axios from "axios";
-// import RESP from "../../server/response";
+import UserProfile from "../../elements/UserProfile";
+import RESP from "../../server/response";
 
-// import { deleteComment, editComment } from "../../modules/redux/comment";
-// import { H3_BOLD, H3, H4_ERR } from "../styled/Hn";
-// import Button from "../../elements/Button";
+const Comment = ({ id, username, userprofile, ismine, content }) => {
+  const isLogin = useSelector((state) => state.user.isLogin);
 
-// // TODO 한번에 하나만 수정 가능하게?
-// // TODO 이전 값 원형 복귀 안됨!
-// const Comment = ({ id, nickname, content, isMine, postId }) => {
-//   const {
-//     register,
-//     handleSubmit,
-//     formState: { errors },
-//   } = useForm({ mode: "onChange" });
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    mode: "onChange",
+    defaultValues: {
+      editContent: content,
+    },
+  });
 
-//   const [inEdit, setInEdit] = useState(false);
-//   const [editContent, setEditContent] = useState(content);
+  // console.log(content);
+  // console.log("comment :", content);
 
-//   const dispatch = useDispatch();
+  const [inEdit, setInEdit] = useState(false);
+  const [isDeleted, setIsDeleted] = useState(false);
+  const [currComment, setCurrComment] = useState(content);
+  const [showBtn, setShowBtn] = useState(true);
 
-//   const onEditHandler = () => {
-//     setInEdit(true);
-//   };
+  const toggleEdit = () => {
+    if (!inEdit) {
+      setInEdit((prev) => !prev);
+      setShowBtn((prev) => !prev);
+      return;
+    }
+    reset({ editContent: content });
+    setInEdit((prev) => !prev);
+    setShowBtn((prev) => !prev);
+  };
+  console.log(showBtn);
+  const submitForm = async ({ editContent }) => {
+    //props 를 id, content, hashtags 줘야하는지
+    const hashtags = parseHashtags(editContent);
+    // console.log(editContent);
 
-//   const onChangeHandler = (e) => {
-//     const value = e.target.value;
-//     setEditContent(value);
-//   };
+    const {
+      result,
+      status: { message },
+      output,
+    } = RESP.COMMENT.EDIT_SUCCESS;
 
-//   const onCancelHandler = () => {
-//     setInEdit(false);
-//     setEditContent(content);
-//   };
+    //fail
+    // const {
+    //   result,
+    //   status:{message},
+    // } = RESP.COMMENT.EDIT_FAIL
 
-//   const onSubmitHandler = async (formData) => {
-//     // console.log(formData);
+    // const {
+    //   result,
+    //   status:{message},
+    // } = RESP.COMMENT.EDIT_FAIL_AUTH
 
-//     const {
-//       data: {
-//         result,
-//         status: { message },
-//       },
-//     } = await axios.put(
-//       `http://3.34.47.86/api/post/${postId}/${id}`,
-//       formData,
-//       {
-//         headers: {
-//           Authorization: localStorage.getItem("AccessToken"),
-//           RefreshToken: localStorage.getItem("RefreshToken"),
-//         },
-//       }
-//     );
+    if (!result) {
+      alert(message);
+      return;
+    }
 
-//     // const {
-//     //   result,
-//     //   status: { message },
-//     // } = RESP.CREATE_COMMENT_SUCCESS;
+    setInEdit((prev) => !prev);
+    setCurrComment(editContent);
+    setShowBtn((prev) => !prev);
+  };
 
-//     if (!result) {
-//       alert(message);
-//       return;
-//     }
+  const clickDelete = async (id) => {
+    const {
+      result,
+      status: { message },
+    } = RESP.COMMENT.DELETE_SUCCESS;
 
-//     setInEdit(false);
-//     dispatch(editComment());
-//   };
+    console.log("삭제됨");
+    //fail
+    // const {
+    //   result,
+    //   status: { message },
+    // } = RESP.COMMENT.DELETE_FAIL;
+    // const {
+    //   result,
+    //   status: { message },
+    // } = RESP.COMMENT.DELETE_FAIL_AUTH;
 
-//   const deletePost = async () => {
-//     const {
-//       data: {
-//         result,
-//         status: { message },
-//       },
-//     } = await axios.delete(`http://3.34.47.86/api/post/${postId}/${id}`, {
-//       headers: {
-//         Authorization: localStorage.getItem("AccessToken"),
-//         RefreshToken: localStorage.getItem("RefreshToken"),
-//       },
-//     });
+    if (!result) {
+      alert(message);
+      return;
+    }
 
-//     // const {
-//     //   result,
-//     //   status: { message },
-//     // } = RESP.DELETE_COMMENT_SUCCESS;
+    setIsDeleted(true);
+  };
 
-//     if (!result) {
-//       alert(message);
-//       return;
-//     }
+  // console.log(inEdit);
+  return (
+    <>
+      {!isDeleted ? (
+        <div className="card">
+          {ismine ? (
+            <StComment>
+              <UserProfile
+                className="userimg"
+                userprofile={userprofile}
+              ></UserProfile>
+              <div className="wrap">
+                <div className="userinfowrap">
+                  <div className="username">{username}</div>
+                  <div className="content">
+                    {!inEdit ? (
+                      <div>{currComment}</div>
+                    ) : (
+                      <form onSubmit={handleSubmit(submitForm)}>
+                        <div>
+                          <input
+                            type="text"
+                            id="editContent"
+                            {...register("editContent", {
+                              required:
+                                "You should write comment to edit post.",
+                              maxLength: {
+                                value: 1000,
+                                message:
+                                  "Content should be shorter than 1000 characters.",
+                              },
+                              validate: {
+                                notEmpty: (value) =>
+                                  notEmptyCheck(value) ||
+                                  "Content cannot be empty string.",
+                              },
+                            })}
+                          />
+                          <button
+                          // onClick={() => {
+                          //   clickEdit();
+                          // }}
+                          >
+                            save
+                          </button>
+                          <button onClick={toggleEdit}>cancel</button>
 
-//     dispatch(deleteComment());
-//   };
+                          {errors.editComment ? (
+                            <div>{errors.editComment.message}</div>
+                          ) : null}
+                        </div>
+                      </form>
+                    )}
+                  </div>
+                </div>
+                {!showBtn ? null : (
+                  <div className="btnbox">
+                    <button onClick={toggleEdit}>편집</button>
+                    <button onClick={clickDelete}>삭제</button>
+                  </div>
+                )}
+              </div>
+            </StComment>
+          ) : (
+            <StComment>
+              <UserProfile
+                className="userimg"
+                userprofile={userprofile}
+              ></UserProfile>
+              <div className="wrap">
+                <div className="userinfowrap">
+                  <div className="username">{username}</div>
+                  <div className="content">{currComment}</div>
+                </div>
+              </div>
+            </StComment>
+          )}
+        </div>
+      ) : null}
+    </>
+  );
+};
 
-//   const onDeleteHandler = () => {
-//     let answer = window.confirm("Are you sure to delete this comment?");
-//     if (!answer) {
-//       return;
-//     }
-//     deletePost();
-//   };
+export default Comment;
 
-//   return (
-//     <CommentWrapper>
-//       <NicknameWrapper>
-//         <H3_BOLD>{nickname}</H3_BOLD>
-//       </NicknameWrapper>
-//       {!inEdit ? (
-//         <>
-//           <ContentWrapper>
-//             <H3>{content}</H3>
-//           </ContentWrapper>
-//           {isMine ? (
-//             <>
-//               <ButtonWrapper>
-//                 <Button icon={faPencil} size='sm' onClick={onEditHandler} />
-//               </ButtonWrapper>
-//               <ButtonWrapper>
-//                 <Button icon={faXmark} size='sm' onClick={onDeleteHandler} />
-//               </ButtonWrapper>
-//             </>
-//           ) : null}
-//         </>
-//       ) : null}
-//       {inEdit ? (
-//         <Form onSubmit={handleSubmit(onSubmitHandler)}>
-//           <InputWrapper>
-//             <Input
-//               {...register("content", {
-//                 required: "You should write content to edit comment.",
-//                 validate: {
-//                   notEmpty: (v) =>
-//                     v.replace(/\s+/g, "") !== "" ||
-//                     "You should write content to edit comment.",
-//                 },
-//               })}
-//               type='text'
-//               id='content'
-//               placeholder='Write comment here...'
-//               value={editContent}
-//               onChange={onChangeHandler}
-//             />
-//             <Button type='submit' content='save' size='sm' />
-//             <Button
-//               type='button'
-//               content='cancel'
-//               size='sm'
-//               onClick={onCancelHandler}
-//             />
-//           </InputWrapper>
-//           {errors?.content ? (
-//             <ErrorWrapper>
-//               <H4_ERR>{errors.content.message}</H4_ERR>
-//             </ErrorWrapper>
-//           ) : null}
-//         </Form>
-//       ) : null}
-//     </CommentWrapper>
-//   );
-// };
-
-// export default Comment;
-
-// const CommentWrapper = styled.div`
-//   width: 100%;
-//   display: flex;
-//   flex-wrap: nowrap;
-//   box-sizing: border-box;
-//   padding: 5px;
-// `;
-
-// // TODO min width? 넘침...
-// const NicknameWrapper = styled.div`
-//   width: 35%;
-//   margin-left: 10px;
-// 	overflow: hidden;
-// `;
-
-// const ContentWrapper = styled.div`
-//   width: 70%;
-// `;
-
-// const ButtonWrapper = styled.div`
-//   margin-left: 10px;
-// `;
-
-// const Form = styled.form`
-//   width: 100%;
-//   height: 100%;
-//   margin: auto;
-//   display: flex;
-//   flex-direction: column;
-//   flex-wrap: nowrap;
-//   align-items: flex-start;
-// `;
-
-// const InputWrapper = styled.div`
-//   display: flex;
-//   width: 100%;
-//   box-sizing: border-box;
-//   padding: 10px;
-// `;
-
-// const Input = styled.input`
-//   width: 100%;
-// `;
-
-// const ErrorWrapper = styled.div`
-//   box-sizing: border-box;
-//   padding: 0px 10px 20px;
-// `;
+const StComment = styled.div`
+  background-color: pink;
+  border: 1px solid;
+  box-sizing: border-box;
+  margin-bottom: 5px;
+  width: 100%;
+  /* height: 60px; */
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+  .userimg {
+    width: 60px;
+    /* height: 60px; */
+    background-color: greenyellow;
+  }
+  .wrap {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    .userinfowrap {
+      width: 100%;
+      .username {
+        width: 100%;
+        /* height: 30px; */
+        background-color: tomato;
+      }
+      .content {
+        width: 100%;
+        /* height: 30px; */
+        background-color: peru;
+      }
+    }
+    .btnbox {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* flex-direction: column; */
+      /* justify-content: flex-end; */
+    }
+  }
+`;
