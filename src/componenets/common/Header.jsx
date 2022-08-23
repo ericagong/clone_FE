@@ -11,9 +11,14 @@ const Header = (props) => {
     <StHeader>
       <div className="logo">5witter</div>
       {isLogin ? (
-        <Link to="/profile/" style={{ textDecoration: "none" }}>
-          <div className="profile">Profile</div>
-        </Link>
+        <div>
+          <Link to="/profile/" style={{ textDecoration: "none" }}>
+            <div className="profile">Profile</div>
+          </Link>
+          <Link to="/create" style={{ textDecoration: "none" }}>
+            <div className="create">Create</div>
+          </Link>
+        </div>
       ) : null}
       {/* <hr style={{ backgroundColor: "black", width: "100%", height: "1px" }} /> */}
       <SearchBar className="searchbar"></SearchBar>
@@ -36,6 +41,11 @@ const StHeader = styled.div`
     font-weight: bold;
   }
   .profile {
+    color: royalblue;
+    font-size: 30px;
+    font-weight: bold;
+  }
+  .create {
     color: royalblue;
     font-size: 30px;
     font-weight: bold;

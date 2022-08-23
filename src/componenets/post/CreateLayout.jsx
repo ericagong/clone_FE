@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { FaPaperclip } from "react-icons/fa";
 import { IoIosClose } from "react-icons/io";
 
@@ -10,7 +11,7 @@ import ImgView from "./ImgView";
 import styled from "styled-components";
 
 // TODO change to 정사각형
-const Create = (props) => {
+const CreateLayout = (props) => {
   const {
     register,
     handleSubmit,
@@ -20,6 +21,8 @@ const Create = (props) => {
 
   const [isLoading, setIsLoading] = useState(true);
   const [fileUrls, setFileUrls] = useState([]);
+
+  const navigate = useNavigate();
 
   // TODO blob 알아보기
   const submitForm = async ({ content, files }) => {
@@ -56,7 +59,9 @@ const Create = (props) => {
       return;
     }
 
-    reset({ content: "", files: [] });
+    // reset({ content: "", files: [] });
+    alert(message);
+    navigate("/home");
   };
 
   const changeImg = async (e) => {
@@ -128,7 +133,7 @@ const Create = (props) => {
   );
 };
 
-export default Create;
+export default CreateLayout;
 
 const StCreate = styled.div`
   width: 500px;

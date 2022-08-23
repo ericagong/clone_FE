@@ -2,7 +2,6 @@ import { useSelector } from "react-redux";
 
 import MiniUser from "../common/MiniUser";
 import MiniLogin from "../common/MiniLogin";
-import Create from "./Create";
 import Posts from "./Posts";
 
 import Rank from "../../componenets/common/Rank";
@@ -20,7 +19,6 @@ const HomeLayout = (props) => {
         {isLogin ? <MiniUser /> : <MiniLogin />}
       </div>
       <div id="center">
-        <Create />
         <Posts onProfile={false} />
       </div>
       <Rank />

@@ -87,25 +87,25 @@ const MiniUser = (props) => {
 
   return (
     <StMiniUser>
-      <div className="profile_box">
+      <div className='profile_box'>
         <UserProfile userprofile={info.userprofile} />
-        <Username isme={true} username={info.username} />
-        <button type="button" onClick={onLogoutHandler}>
+        <Username isme={true} username={info.username} inPost={false} />
+        <button type='button' onClick={onLogoutHandler}>
           Logout
         </button>
       </div>
-      <div className="info_box">
-        <div className="info_item">
-          <div className="title">Posts</div>
-          <div className="total">{info.numposts}</div>
+      <div className='info_box'>
+        <div className='info_item'>
+          <div className='title'>Posts</div>
+          <div className='total'>{info.numposts}</div>
         </div>
-        <div className="info_item">
-          <div className="title">Following</div>
-          <div className="total">{info.numfollowing}</div>
+        <div className='info_item'>
+          <div className='title'>Following</div>
+          <div className='total'>{info.numfollowing}</div>
         </div>
-        <div className="info_item">
-          <div className="title">Follwers</div>
-          <div className="total">{info.numfollowers}</div>
+        <div className='info_item'>
+          <div className='title'>Follwers</div>
+          <div className='total'>{info.numfollowers}</div>
         </div>
       </div>
     </StMiniUser>

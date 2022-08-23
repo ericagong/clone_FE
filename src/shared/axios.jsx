@@ -1,15 +1,17 @@
 import axios from "axios";
 
 const base = {
-  server_http: process.env.REACT_APP_HTTP_URI,
-  server_https: process.env.REACT_APP_HTTPS_URI,
+  server_http: "http://52.78.201.181",
+  server_https: "https://sparta-omj.shop",
 };
 
 const api = axios.create({
   baseURL: base.server_http,
+  // baseURL: base.server_https,
   headers: {
     "content-type": "application/json; charset=UTF-8",
     accept: "application/json,",
+    withCredentials: true,
   },
 });
 
@@ -31,12 +33,12 @@ api.interceptors.request.use(function (config) {
 export const apis = {
   // auth : signup, login, logout
   signup: (email, username, password) =>
-    api.comment("/api/signup", {
+    api.post("/api/signup", {
       email,
       username,
       password,
     }),
-  login: (email, password) => api.comment("/api/login", { email, password }),
+  login: (email, password) => api.post("/api/login", { email, password }),
   logout: () => api.get("/api/logout"),
 
   // post : CRUD, like/unlike
@@ -72,7 +74,7 @@ export const apis = {
   // comment : CRUD
   create_comment: (id, content, hashtags) =>
     // TODO  create에 Blob 써보기
-    api.comment(`/api/comment/${id}`, { content, hashtags }),
+    api.post(`/api/comment/${id}`, { content, hashtags }),
   get_comments: (postId, pageNum, pageLimit) =>
     api.get(
       `/api/comments?postId=${postId}&pageNum=${pageNum}&pageLimit=${pageLimit}`
