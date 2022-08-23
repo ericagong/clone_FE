@@ -14,16 +14,16 @@ const HomeLayout = (props) => {
   return (
     <StHomeLayout>
       <div id="left">
-        {/* <div>left</div> */}
+        {/* <MiniLogin />
+        <MiniUser /> */}
+
         {isLogin ? <MiniUser /> : <MiniLogin />}
       </div>
       <div id="center">
-        {/* <div>center</div> */}
         <Create />
         <Posts onProfile={false} />
       </div>
       <div id="right">
-        {/* <div>right</div> */}
         <SearchBar />
         <Rank />
       </div>
@@ -34,20 +34,7 @@ const HomeLayout = (props) => {
 export default HomeLayout;
 
 const StHomeLayout = styled.div`
-  /* background-color: pink; */
   width: 100%;
   display: flex;
   justify-content: space-between;
-  #left {
-    /* background-color: royalblue; */
-    width: 240px;
-  }
-  #center {
-    /* background-color: tomato; */
-    width: 500px;
-  }
-  #right {
-    /* background-color: peachpuff; */
-    width: 210px;
-  }
 `;
