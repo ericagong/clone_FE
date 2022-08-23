@@ -1,14 +1,14 @@
 import Layout from "../componenets/common/Layout";
 import Header from "../componenets/common/Header";
-import CreateLayout from "../componenets/post/CreateLayout";
+import DetailLayout from "../componenets/post/DetailLayout";
 
-const Create = (props) => {
+const Detail = (props) => {
   return (
     <Layout>
       <Header />
-      <CreateLayout />
+      <DetailLayout />
     </Layout>
   );
 };
 
-export default Create;
+export default Detail;
