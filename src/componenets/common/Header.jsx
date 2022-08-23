@@ -9,7 +9,7 @@ const Header = (props) => {
     <StHeader>
       <div className="logo">5witter</div>
       {isLogin ? (
-        <Link to="/profile/">
+        <Link to="/profile/" style={{ textDecoration: "none" }}>
           <div className="profile">Profile</div>
         </Link>
       ) : null}
@@ -23,7 +23,7 @@ export default Header;
 const StHeader = styled.div`
   width: 100%;
   height: 75px;
-  border-bottom: 2px solid rgba(0, 0, 0, 0.4);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.23);
   /* background-color: pink; */
   display: flex;
   align-items: center;

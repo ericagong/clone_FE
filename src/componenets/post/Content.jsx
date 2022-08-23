@@ -7,6 +7,7 @@ import RESP from "../../server/response";
 import { parseHashtags, notEmptyCheck } from "../../shared/regex";
 import LikeBtn from "../../elements/LikeBtn";
 import CommentsLayout from "../comment/CommentsLayout";
+import styled from "styled-components";
 
 // TODO 중복 해시태그?
 // TODO reducer C, U, D 연결
@@ -198,7 +199,7 @@ const Content = ({
   };
 
   return (
-    <>
+    <StContent>
       {!isDeleted ? (
         <div>
           <div>
@@ -295,8 +296,13 @@ const Content = ({
           </div>
         </div>
       ) : null}
-    </>
+    </StContent>
   );
 };
 
 export default Content;
+
+const StContent = styled.div`
+  width: 100%;
+  background-color: pink;
+`;
