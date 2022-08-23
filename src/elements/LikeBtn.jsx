@@ -1,9 +1,11 @@
+import { useSelector } from "react-redux";
 import { useState } from "react";
 
 import { apis } from "../shared/axios";
 import RESP from "../server/response";
 
-const LikeBtn = ({ isliked, isLogin }) => {
+const LikeBtn = ({ isliked }) => {
+  const isLogin = useSelector((state) => state.user.isLogin);
   const [isLiked, setIsLiked] = useState(isliked);
 
   // 서버에 요청만 보내고, 리렌더링 하지 않고 토글처리만 하기!
