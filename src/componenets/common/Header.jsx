@@ -2,6 +2,8 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+import SearchBar from "../../elements/SearchBar";
+
 const Header = (props) => {
   const isLogin = useSelector((state) => state.user.isLogin);
 
@@ -14,6 +16,7 @@ const Header = (props) => {
         </Link>
       ) : null}
       {/* <hr style={{ backgroundColor: "black", width: "100%", height: "1px" }} /> */}
+      <SearchBar className="searchbar"></SearchBar>
     </StHeader>
   );
 };

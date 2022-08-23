@@ -101,9 +101,9 @@ const Create = (props) => {
           ) : null}
         </div>
         <div className="input_imgbox">
-          {/* <label htmlFor="img-file" className="input-file">
+          <label htmlFor="img-file" className="input-file">
             <FaPaperclip />
-          </label> */}
+          </label>
           <input
             {...register("files")}
             id="img-file"
@@ -111,7 +111,7 @@ const Create = (props) => {
             accept="image/jpg, image/png, image/jpeg"
             multiple
             onChange={changeImg}
-            // style={{ display: "none" }}
+            style={{ display: "none" }}
           />
           <button type="submit">Create</button>
         </div>

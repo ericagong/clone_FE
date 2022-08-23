@@ -16,13 +16,13 @@ const Content = ({ username }) => {
   return (
     <>
       <div>
-        <button type='button' id='Posts' onClick={clickCategory}>
+        <button type="button" id="Posts" onClick={clickCategory}>
           Posts
         </button>
-        <button type='button' id='Followings' onClick={clickCategory}>
+        <button type="button" id="Followings" onClick={clickCategory}>
           Followings
         </button>
-        <button type='button' id='Followers' onClick={clickCategory}>
+        <button type="button" id="Followers" onClick={clickCategory}>
           Followers
         </button>
       </div>

@@ -4,7 +4,7 @@ import MiniUser from "../common/MiniUser";
 import MiniLogin from "../common/MiniLogin";
 import Create from "./Create";
 import Posts from "./Posts";
-import SearchBar from "../../elements/SearchBar";
+
 import Rank from "../../componenets/common/Rank";
 import styled from "styled-components";
 
@@ -23,10 +23,7 @@ const HomeLayout = (props) => {
         <Create />
         <Posts onProfile={false} />
       </div>
-      <div id="right">
-        <SearchBar />
-        <Rank />
-      </div>
+      <Rank />
     </StHomeLayout>
   );
 };
@@ -37,4 +34,7 @@ const StHomeLayout = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  /* #right {
+    background-color: yellowgreen;
+  } */
 `;
