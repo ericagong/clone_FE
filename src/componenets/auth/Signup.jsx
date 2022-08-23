@@ -76,9 +76,6 @@ const Signup = (props) => {
         </div>
         <div>
           <label htmlFor='username'>username</label>
-          {errors.username ? (
-            <div>Username should consists of english letters or number.</div>
-          ) : null}
           <input
             type='text'
             id='username'
@@ -95,7 +92,7 @@ const Signup = (props) => {
               },
               maxLength: {
                 value: 10,
-                message: "Username should be longer than 2 letters.",
+                message: "Username should be shorter than 11 letters.",
               },
             })}
           />
