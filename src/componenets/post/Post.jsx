@@ -17,12 +17,12 @@ const Post = ({ userprofile, imageUrls, username, time, ismine, ...rest }) => {
           {imageUrls.length !== 0 ? (
             <ImgView imgUrls={imageUrls} />
           ) : (
-            <div className="no_img">No Images</div>
+            <div className='no_img'>No Images</div>
           )}
         </div>
-        <div className="post_user_box">
-          <div className="post_user_info">
-            <UserProfile userprofile={userprofile} />
+        <div className='post_user_box'>
+          <div className='post_user_info'>
+            <UserProfile userprofile={userprofile} inPost={true} />
             <Username isme={ismine} username={username} />
           </div>
           <div>{time}</div>
