@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import MiniUser from "../common/MiniUser";
 import MiniLogin from "../common/MiniLogin";
 import Posts from "./Posts";
-import SearchBar from "../../elements/SearchBar";
+
 import Rank from "../../componenets/common/Rank";
 import styled from "styled-components";
 
@@ -12,19 +12,16 @@ const HomeLayout = (props) => {
 
   return (
     <StHomeLayout>
-      <div id='left'>
+      <div id="left">
         {/* <MiniLogin />
         <MiniUser /> */}
 
         {isLogin ? <MiniUser /> : <MiniLogin />}
       </div>
-      <div id='center'>
+      <div id="center">
         <Posts onProfile={false} />
       </div>
-      <div id='right'>
-        <SearchBar />
-        <Rank />
-      </div>
+      <Rank />
     </StHomeLayout>
   );
 };
@@ -35,4 +32,7 @@ const StHomeLayout = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  /* #right {
+    background-color: yellowgreen;
+  } */
 `;
