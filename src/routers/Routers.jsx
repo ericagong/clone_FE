@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import Home from "../pages/Home";
+import Create from "../pages/Create";
 import Profile from "../pages/Profile";
 import SearchResult from "../pages/SearchResult";
 import NotFound from "../pages/NotFound";
@@ -16,6 +17,7 @@ const Routers = (props) => {
         <Route path='/signup' element={<Signup />} />
         <Route path='/' element={<Home />} />
         <Route path='/home' element={<Home />} />
+        <Route path='/create' element={<Create />} />
         <Route path='/profile/' element={<Profile />} />
         <Route path='/profile/:username' element={<Profile />} />
         <Route path='/search/:hashtag' element={<SearchResult />} />

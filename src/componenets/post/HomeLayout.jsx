@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 
 import MiniUser from "../common/MiniUser";
 import MiniLogin from "../common/MiniLogin";
-import Create from "./Create";
+import Create from "./CreatePost";
 import Posts from "./Posts";
 import SearchBar from "../../elements/SearchBar";
 import Rank from "../../componenets/common/Rank";
@@ -13,17 +13,16 @@ const HomeLayout = (props) => {
 
   return (
     <StHomeLayout>
-      <div id="left">
+      <div id='left'>
         {/* <MiniLogin />
         <MiniUser /> */}
 
         {isLogin ? <MiniUser /> : <MiniLogin />}
       </div>
-      <div id="center">
-        <Create />
+      <div id='center'>
         <Posts onProfile={false} />
       </div>
-      <div id="right">
+      <div id='right'>
         <SearchBar />
         <Rank />
       </div>

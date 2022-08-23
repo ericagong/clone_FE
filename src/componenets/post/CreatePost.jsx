@@ -10,7 +10,7 @@ import ImgView from "./ImgView";
 import styled from "styled-components";
 
 // TODO change to 정사각형
-const Create = (props) => {
+const CreatePost = (props) => {
   const {
     register,
     handleSubmit,
@@ -80,10 +80,10 @@ const Create = (props) => {
   return (
     <StCreate>
       <form onSubmit={handleSubmit(submitForm)}>
-        <div className="input_box">
+        <div className='input_box'>
           <input
-            type="text"
-            id="content"
+            type='text'
+            id='content'
             {...register("content", {
               required: "You should write content to create post.",
               maxLength: {
@@ -97,28 +97,28 @@ const Create = (props) => {
             })}
           />
           {errors.content ? (
-            <div className="error">{errors.content.message}</div>
+            <div className='error'>{errors.content.message}</div>
           ) : null}
         </div>
-        <div className="input_imgbox">
+        <div className='input_imgbox'>
           {/* <label htmlFor="img-file" className="input-file">
             <FaPaperclip />
           </label> */}
           <input
             {...register("files")}
-            id="img-file"
-            type="file"
-            accept="image/jpg, image/png, image/jpeg"
+            id='img-file'
+            type='file'
+            accept='image/jpg, image/png, image/jpeg'
             multiple
             onChange={changeImg}
             // style={{ display: "none" }}
           />
-          <button type="submit">Create</button>
+          <button type='submit'>Create</button>
         </div>
 
         {!isLoading ? (
-          <div className="x_btn_flex">
-            <IoIosClose className="x_btn" onClick={onClickClose} />
+          <div className='x_btn_flex'>
+            <IoIosClose className='x_btn' onClick={onClickClose} />
           </div>
         ) : null}
 
@@ -128,7 +128,7 @@ const Create = (props) => {
   );
 };
 
-export default Create;
+export default CreatePost;
 
 const StCreate = styled.div`
   width: 500px;
