@@ -62,43 +62,43 @@ const Login = (props) => {
   return (
     <StLogin>
       <form onSubmit={handleSubmit(onSubmitHandler)}>
-        <div className="input_box">
-          <label htmlFor="email" className="email">
+        <div className='input_box'>
+          <label htmlFor='email' className='email'>
             <FaUser />
           </label>
           <input
-            type="text"
-            id="email"
-            placeholder="UserEmail"
+            type='text'
+            id='email'
+            placeholder='UserEmail'
             {...register("email", {
               required: "You should write email.",
             })}
           />
         </div>
         {errors.email ? (
-          <div className="error">{errors.email.message}</div>
+          <div className='error'>{errors.email.message}</div>
         ) : null}
-        <div className="input_box">
-          <label htmlFor="password" className="pw">
+        <div className='input_box'>
+          <label htmlFor='password' className='pw'>
             <FaKey />
           </label>
           <input
-            type="password"
-            id="password"
-            placeholder="Password"
+            type='password'
+            id='password'
+            placeholder='Password'
             {...register("password", {
               required: "You should write password",
             })}
           />
         </div>
         {errors.password ? (
-          <div className="error">{errors.password.message}</div>
+          <div className='error'>{errors.password.message}</div>
         ) : null}
-        <div className="login_box">
+        <div className='login_box'>
           <Link to={SIGNUP_PATH}>
             <div>Sign up</div>
           </Link>
-          <button type="submit">Login</button>
+          <button type='submit'>Login</button>
         </div>
       </form>
     </StLogin>

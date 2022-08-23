@@ -24,18 +24,18 @@ const Signup = (props) => {
   };
 
   const onSubmitHandler = async ({ email, username, password }) => {
-    // const {
-    //   data: {
-    //     result,
-    //     status: { message },
-    //   },
-    // } = await apis.signup(email, username, password);
+    const {
+      data: {
+        result,
+        status: { message },
+      },
+    } = await apis.signup(email, username, password);
 
     // success
-    const {
-      result,
-      status: { message },
-    } = RESP.AUTH.SIGN_UP_SUCCESS;
+    // const {
+    //   result,
+    //   status: { message },
+    // } = RESP.AUTH.SIGN_UP_SUCCESS;
 
     // fail
     // const {
@@ -76,7 +76,9 @@ const Signup = (props) => {
         </div>
         <div>
           <label htmlFor='username'>username</label>
-          <div>Username should consists of english letters or number.</div>
+          {errors.username ? (
+            <div>Username should consists of english letters or number.</div>
+          ) : null}
           <input
             type='text'
             id='username'
