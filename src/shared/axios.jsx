@@ -1,15 +1,16 @@
 import axios from "axios";
 
 const base = {
-  server_http: process.env.REACT_APP_HTTP_URI,
-  server_https: process.env.REACT_APP_HTTPS_URI,
+  server_http: "http://52.78.201.181",
+  server_https: "https://sparta-omj.shop",
 };
 
 const api = axios.create({
-  baseURL: base.server_https,
+  baseURL: base.server_http,
   headers: {
     "content-type": "application/json; charset=UTF-8",
     accept: "application/json,",
+    withCredentials: true,
   },
 });
 
