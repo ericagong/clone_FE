@@ -200,8 +200,8 @@ const Post = ({
         <StPost>
           <div>
             <div className='post_user_info'>
-              <UserProfile userprofile={userprofile} inPost={true} />
-              <Username isme={ismine} username={username} />
+              <UserProfile userprofile={userprofile} />
+              <Username isme={ismine} username={username} inPost={true} />
               <div>
                 {!showMore ? (
                   <button type='button' onClick={toggleMore}>
