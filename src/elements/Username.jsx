@@ -5,12 +5,13 @@ import styled from "styled-components";
 const Username = ({ isme, username, inPost }) => {
   // console.log(inPost);
   return (
-    <StUserName>
+    <StUserName inpost={inPost}>
       <Link
         to={!isme ? `/profile/${username}` : "/profile/"}
         style={{ textDecoration: "none", display: "block" }}
       >
         <StuserName inpost={inPost}>{username}</StuserName>
+
       </Link>
     </StUserName>
   );
@@ -18,6 +19,7 @@ const Username = ({ isme, username, inPost }) => {
 
 export default Username;
 const StUserName = styled.div`
+
   /* .name {
     font-size: 35px;
     font-weight: bold;
