@@ -80,8 +80,6 @@ const Comment = ({ id, username, userprofile, ismine, content }) => {
       result,
       status: { message },
     } = RESP.COMMENT.DELETE_SUCCESS;
-
-    console.log("삭제됨");
     //fail
     // const {
     //   result,
@@ -104,24 +102,24 @@ const Comment = ({ id, username, userprofile, ismine, content }) => {
   return (
     <StCommentWrap>
       {!isDeleted ? (
-        <div className="card">
+        <div className='card'>
           {ismine ? (
             <StComment>
               <UserProfile userprofile={userprofile}></UserProfile>
-              <div className="wrap">
-                <div className="userinfowrap">
-                  <div className="username">{username}</div>
-                  <div className="comment_content">
+              <div className='wrap'>
+                <div className='userinfowrap'>
+                  <div className='username'>{username}</div>
+                  <div className='comment_content'>
                     {!inEdit ? (
-                      <div className="curr_comment">{currComment}</div>
+                      <div className='curr_comment'>{currComment}</div>
                     ) : (
-                      <div className="what">
+                      <div className='what'>
                         <form onSubmit={handleSubmit(submitForm)}>
-                          <div className="ed_input_box">
+                          <div className='ed_input_box'>
                             <input
-                              type="text"
-                              id="editContent"
-                              className="ed_input"
+                              type='text'
+                              id='editContent'
+                              className='ed_input'
                               {...register("editContent", {
                                 required:
                                   "You should write comment to edit post.",
@@ -138,17 +136,17 @@ const Comment = ({ id, username, userprofile, ismine, content }) => {
                               })}
                             />
 
-                            <div className="ed_button_group">
-                              <button className="ed_option">save</button>
+                            <div className='ed_button_group'>
+                              <button className='ed_option'>save</button>
                               <button
                                 onClick={toggleEdit}
-                                className="ed_option"
+                                className='ed_option'
                               >
                                 cancel
                               </button>
                             </div>
                             {errors.editContent ? (
-                              <div className="error">
+                              <div className='error'>
                                 {errors.editContent.message}
                               </div>
                             ) : null}
@@ -159,10 +157,10 @@ const Comment = ({ id, username, userprofile, ismine, content }) => {
                   </div>
                 </div>
                 {!showBtn ? null : (
-                  <div className="btnbox">
-                    <FaRegEdit onClick={toggleEdit} className="comment_btn" />
+                  <div className='btnbox'>
+                    <FaRegEdit onClick={toggleEdit} className='comment_btn' />
 
-                    <FaTrashAlt className="comment_btn" onClick={clickDelete} />
+                    <FaTrashAlt className='comment_btn' onClick={clickDelete} />
                   </div>
                 )}
               </div>
@@ -170,10 +168,10 @@ const Comment = ({ id, username, userprofile, ismine, content }) => {
           ) : (
             <StNotMineComment>
               <UserProfile userprofile={userprofile}></UserProfile>
-              <div className="NM_wrap">
-                <div className="NM_userinfowrap">
-                  <div className="NM_username">{username}</div>
-                  <div className="NM_content">{currComment}</div>
+              <div className='NM_wrap'>
+                <div className='NM_userinfowrap'>
+                  <div className='NM_username'>{username}</div>
+                  <div className='NM_content'>{currComment}</div>
                 </div>
               </div>
             </StNotMineComment>

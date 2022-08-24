@@ -866,7 +866,7 @@ const RESP = {
       },
       output: {
         currpage: 1,
-        totalpage: 2,
+        totalpage: 1,
         currcontent: 5,
         totalelements: 50,
         isme: false,
