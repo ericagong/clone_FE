@@ -79,30 +79,32 @@ const LikeBtn = ({ isliked }) => {
 
 export default LikeBtn;
 const StLikeBtn = styled.div`
+  width: 35px;
   height: 35px;
   display: flex;
   align-items: center;
+  justify-content: center;
+  /* background-color: tomato; */
   button {
     cursor: pointer;
     background-color: transparent;
     padding: 0;
     border: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     transition: all 0.3s;
 
     .like {
-      font-size: 30px;
+      font-size: 24px;
       transition: all 0.2s;
+      cursor: pointer;
       :hover {
         fill: rgb(142, 142, 142);
       }
     }
     .unlike {
       fill: #ed4956;
-      font-size: 30px;
+      font-size: 24px;
       transition: all 0.3s;
+      cursor: pointer;
     }
     :active {
       margin-left: 5px;

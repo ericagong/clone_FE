@@ -54,7 +54,9 @@ const Comments = (props) => {
 
   return (
     <StComments>
-      <p className="comments_header">{pageInfo.totalelements}개 Comments</p>
+      <p className="comments_header">
+        <span>{pageInfo.totalelements}</span>개 Comments
+      </p>
       <div>{commentList}</div>
     </StComments>
   );
@@ -63,10 +65,15 @@ const Comments = (props) => {
 export default Comments;
 
 const StComments = styled.div`
-  width: 416px;
-  /* height: 200px; */
-  /* background-color: royalblue; */
+  width: 100%;
   .comments_header {
-    border-bottom: 1px solid;
+    margin-bottom: 5px;
+    padding: 5px 15px 5px 15px;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.23);
+    span {
+      font-size: 15px;
+      font-weight: bold;
+    }
   }
 `;

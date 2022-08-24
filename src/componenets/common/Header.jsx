@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import SearchBar from "../../elements/SearchBar";
@@ -7,9 +7,13 @@ import SearchBar from "../../elements/SearchBar";
 const Header = (props) => {
   const isLogin = useSelector((state) => state.user.isLogin);
 
+  const navigate = useNavigate();
+
   return (
     <StHeader>
-      <div className="logo">5witter</div>
+      <Link to="/" style={{ textDecoration: "none" }}>
+        <div className="logo">5witter</div>
+      </Link>
       {isLogin ? (
         <div>
           <Link to="/profile/" style={{ textDecoration: "none" }}>
