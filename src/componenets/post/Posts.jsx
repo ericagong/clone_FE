@@ -1,24 +1,15 @@
-import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect, useRef } from "react";
 
-import { getPostsRequest, getPostsDone } from "../../modules/redux/post";
-import { apis } from "../../shared/axios";
+// import { apis } from "../../shared/axios";
 import RESP from "../../server/response";
 import Post from "./Post";
-// TODO dispatch to create
-// TODO infinite scroll 구현 with currPageNum
 
+// TODO check hasMorePosts!
 const Posts = ({ onProfile, username, targetId, goInfo }) => {
-  const isLoading = useSelector((state) => state.post.isLoading);
-  // const currPage = useSelector((state) => state.post.currPage);
-
-  const dispatch = useDispatch();
-
-  const [hasMorePosts, setHasMorePosts] = useState(true);
-
   const [allPosts, setAllPosts] = useState([]);
   const currPageNum = useRef(1);
   const pageLimit = useRef(5);
+  const hasMorePosts = useRef(true);
 
   const [pageInfo, setPageInfo] = useState({
     currpage: 0,
@@ -26,24 +17,17 @@ const Posts = ({ onProfile, username, targetId, goInfo }) => {
     currcontent: 0,
   });
 
-  // const [goDetail, setGoDetail] = useState(false)
-
   // TODO 코드 반복되는 부분 예쁘게 정리하기!
   const getPosts = async () => {
-    if (!hasMorePosts) {
-      return;
-    }
-
     // TODO 전역 axios 가 프라미스 반환하게 바꾸거나, 아니면 then으로 변경해야함.
+
     if (!onProfile) {
       // const resp = await apis.get_posts(pageNum, pageLimit);
       // const { result, status: { message }, output } = resp.data;
 
-      dispatch(getPostsRequest());
-
-      console.log(`getPosts called!`);
-      console.log(`\t pageNum: ${currPageNum.current}`);
-      console.log(`\t pageLimit: ${pageLimit}`);
+      // console.log(`getPosts called!`);
+      // console.log(`\t pageNum: ${currPageNum.current}`);
+      // console.log(`\t pageLimit: ${pageLimit}`);
 
       // success
       const {
@@ -69,8 +53,7 @@ const Posts = ({ onProfile, username, targetId, goInfo }) => {
       setAllPosts((prev) => [...prev, ...posts]);
       setPageInfo({ ...pageInfo, ...rest });
       currPageNum.current += 1;
-
-      dispatch(getPostsDone());
+      hasMorePosts.current = rest.currpage !== rest.totalpage;
     } else {
       // const resp = await apis.get_profile_posts(
       //   username,
@@ -112,8 +95,10 @@ const Posts = ({ onProfile, username, targetId, goInfo }) => {
 
       const { posts, ...rest } = output;
 
-      setAllPosts([...allPosts, ...posts]);
+      setAllPosts((prev) => [...prev, ...posts]);
       setPageInfo({ ...pageInfo, ...rest });
+      currPageNum.current += 1;
+      hasMorePosts.current = rest.currpage !== rest.totalpage;
     }
   };
 
@@ -122,24 +107,17 @@ const Posts = ({ onProfile, username, targetId, goInfo }) => {
       getPosts();
       return;
     }
-    getPosts(currPageNum, pageLimit, username);
+    getPosts();
   }, []);
-
 
   useEffect(() => {
     const onScorll = () => {
-      console.log(
-        window.scrollY,
-        document.documentElement.clientHeight,
-        document.documentElement.scrollHeight
-      );
-      const threshold = 300;
+      const threshold = 10;
       const shouldCall =
         window.scrollY + document.documentElement.clientHeight >
         document.documentElement.scrollHeight - threshold;
-      if (shouldCall && !isLoading) {
-        // isLoading으로 해결
-        getPosts(); // 계속 호출 문제 -> throttle or takelatest
+      if (shouldCall) {
+        getPosts();
       }
     };
     window.addEventListener("scroll", onScorll);
@@ -149,13 +127,8 @@ const Posts = ({ onProfile, username, targetId, goInfo }) => {
     };
   }, []);
 
-  console.log(allPosts);
-  console.log(pageInfo);
-  console.log(currPageNum);
-
   // const postList = allPosts.map((post) => <Post key={post.id} {...post} />);
 
- 
   const postList =
     targetId === undefined
       ? allPosts.map((post) => <Post key={post.id} {...post} />)
