@@ -36,9 +36,9 @@
 ### Comment
 
 [ ] create
-[ X ] read
-[ ] update
-[ ] delete
+[x] read
+[x] update
+[x] delete
 
 ### Profile
 
@@ -55,3 +55,14 @@
 
 [ ] Post Create with redux store?
 [ ] Post delete at upper component -> move show more button!
+
+## TO Dos
+
+[ ] infinite scroll
+[ ] posts
+[ ] comment
+[ ] followInfo
+
+[ ] commment create
+
+[ ] css
