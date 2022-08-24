@@ -3,26 +3,26 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import SearchBar from "../../elements/SearchBar";
+import { HOME_PATH, PROFILE_MY_PATH, CREATE_PATH } from "../../shared/paths";
 
 const Header = (props) => {
   const isLogin = useSelector((state) => state.user.isLogin);
 
   return (
     <StHeader>
-      <Link to='/home' style={{ textDecoration: "none" }}>
+      <Link to={HOME_PATH} style={{ textDecoration: "none" }}>
         <div className='logo'>5witter</div>
       </Link>
       {isLogin ? (
         <div>
-          <Link to='/profile/' style={{ textDecoration: "none" }}>
+          <Link to={PROFILE_MY_PATH} style={{ textDecoration: "none" }}>
             <div className='profile'>Profile</div>
           </Link>
-          <Link to='/create' style={{ textDecoration: "none" }}>
+          <Link to={CREATE_PATH} style={{ textDecoration: "none" }}>
             <div className='create'>Create</div>
           </Link>
         </div>
       ) : null}
-      {/* <hr style={{ backgroundColor: "black", width: "100%", height: "1px" }} /> */}
       <SearchBar className='searchbar'></SearchBar>
     </StHeader>
   );
@@ -34,7 +34,6 @@ const StHeader = styled.div`
   width: 100%;
   height: 75px;
   border-bottom: 2px solid rgba(0, 0, 0, 0.23);
-  /* background-color: pink; */
   display: flex;
   align-items: center;
   gap: 15px;

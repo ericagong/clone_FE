@@ -4,7 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 
 import { LOGIN_PATH } from "../../shared/paths";
 import { apis } from "../../shared/axios";
-import RESP from "../../server/response";
+// import RESP from "../../server/response";
 import { emailCheck, usernameCheck, pwCheck } from "../../shared/regex";
 
 const Signup = (props) => {

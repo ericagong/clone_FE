@@ -2,13 +2,13 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import { FaKey, FaUser } from "react-icons/fa";
+import styled from "styled-components";
 
 import { SIGNUP_PATH } from "../../shared/paths";
-import RESP from "../../server/response";
+// import RESP from "../../server/response";
 import { apis } from "../../shared/axios";
 import { login } from "../../modules/redux/user";
 import { HOME_PATH } from "../../shared/paths";
-import styled from "styled-components";
 
 const Login = (props) => {
   const {
@@ -22,22 +22,21 @@ const Login = (props) => {
   const navigate = useNavigate();
 
   const onSubmitHandler = async ({ email, password }) => {
-    // const resp = await apis.login(email, password);
-    // const {
-    //   result,
-    //   status: { message },
-    // } = resp.data;
-
-    // // TODO check Authorization or authorization
-    // const { authorization } = resp.headers;
-
-    // success
+    const resp = await apis.login(email, password);
     const {
       result,
       status: { message },
-    } = RESP.AUTH.LOGIN_SUCCESS;
+    } = resp.data;
 
-    const { Authorization } = RESP.AUTH.LOGIN_HEADER;
+    const { authorization } = resp.headers;
+
+    // success
+    // const {
+    //   result,
+    //   status: { message },
+    // } = RESP.AUTH.LOGIN_SUCCESS;
+
+    // const { Authorization } = RESP.AUTH.LOGIN_HEADER;
 
     // fail
     // const {
@@ -45,14 +44,12 @@ const Login = (props) => {
     //   status: { message },
     // } = RESP.AUTH.LOGIN_FAIL;
 
-    // TODO 하단 모달로 처리
     if (!result) {
       alert(message);
       return;
     }
 
-    // TODO check Authorization or authorization
-    localStorage.setItem("AccessToken", Authorization);
+    localStorage.setItem("AccessToken", authorization);
 
     dispatch(login());
 
