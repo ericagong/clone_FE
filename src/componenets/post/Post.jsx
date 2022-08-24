@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useState } from "react";
+import { FiX } from "react-icons/fi";
 
 import { apis } from "../../shared/axios";
 import RESP from "../../server/response";
@@ -22,6 +23,7 @@ const Post = ({
   content,
   ismine,
   isfollowing,
+  goDetail,
   ...rest
 }) => {
   const isLogin = useSelector((state) => state.user.isLogin);
@@ -198,60 +200,72 @@ const Post = ({
     <>
       {!isDeleted ? (
         <StPost>
-          <div>
-            <div className='post_user_info'>
-              <UserProfile userprofile={userprofile} inPost={true} />
-              <Username isme={ismine} username={username} />
-              <div>
+          <div className="wrap">
+            <div className="post_user_info">
+              <div className="user_flex">
+                <UserProfile userprofile={userprofile} />
+                <Username isme={ismine} username={username} inPost={true} />
+              </div>
+              <div className="showmore_btn">
                 {!showMore ? (
-                  <button type='button' onClick={toggleMore}>
-                    Show more
-                  </button>
+                  <div className="more">
+                    <div className="circle_box" onClick={toggleMore}>
+                      <div className="circle"></div>
+                      <div className="circle"></div>
+                      <div className="circle"></div>
+                    </div>
+                  </div>
                 ) : (
-                  <button type='button' onClick={toggleMore}>
-                    Hide
-                  </button>
+                  <div onClick={toggleMore} className="close">
+                    <FiX />
+                  </div>
                 )}
                 {showMore ? (
                   <div>
                     {!ismine && !isFollowing ? (
-                      <button type='button' onClick={toggleFollow}>
+                      <div type="button" onClick={toggleFollow}>
                         Follow this user
-                      </button>
+                      </div>
                     ) : null}
                     {!ismine && isFollowing ? (
-                      <button type='button' onClick={toggleFollow}>
+                      <div className="option" onClick={toggleFollow}>
                         Unfollow this user
-                      </button>
+                      </div>
                     ) : null}
                     {ismine ? (
                       <div>
-                        <button type='button' onClick={toggleEdit}>
-                          Edit this post
-                        </button>
-                        <button type='button' onClick={clickDelete}>
-                          Delete this post
-                        </button>
+                        <div className="option" onClick={toggleEdit}>
+                          Edit
+                        </div>
+                        <div className="option" onClick={clickDelete}>
+                          Delete
+                        </div>
                       </div>
                     ) : null}
                   </div>
                 ) : null}
               </div>
             </div>
-            <div>{time}</div>
+
             <div>
               {imageUrls.length !== 0 ? <ImgView imgUrls={imageUrls} /> : null}
             </div>
-            <div className='post_user_box'></div>
-            <div>
+
+            <div className="post_user_box"></div>
+            <div className="content">
               {!inEdit ? (
-                <Content content={currContent} {...rest} />
+                <Content
+                  content={currContent}
+                  {...rest}
+                  time={time}
+                  goDetail={true}
+                />
               ) : (
                 <form onSubmit={handleSubmit(submitForm)}>
-                  <div>
+                  <div className="input_box">
                     <input
-                      type='text'
-                      id='editContent'
+                      type="text"
+                      id="editContent"
                       {...register("editContent", {
                         required: "You should write content to edit post.",
                         maxLength: {
@@ -267,13 +281,15 @@ const Post = ({
                       })}
                     />
                     {errors.editContent ? (
-                      <div>{errors.editContent.message}</div>
+                      <div className="error">{errors.editContent.message}</div>
                     ) : null}
                   </div>
-                  <button type='submit'>Save Post</button>
-                  <button type='button' onClick={toggleEdit}>
-                    Cancel
-                  </button>
+                  <div className="btn_group">
+                    <button type="submit">Save Post</button>
+                    <button type="button" onClick={toggleEdit}>
+                      Cancel
+                    </button>
+                  </div>
                 </form>
               )}
             </div>
@@ -292,23 +308,96 @@ const StPost = styled.div`
   box-sizing: border-box;
   box-shadow: rgb(0 0 0 / 23%) 3px 3px 8px 0px;
   margin-bottom: 30px;
-  /* background-color: pink; */
-  .no_img {
-    margin: 10px 0;
-    text-align: center;
-    padding: 15px 0;
-    background-color: rgb(224, 224, 224);
-    border-radius: 8px;
-    /* background-color: pink; */
-  }
-  .post_user_box {
-    margin: 10px;
+  .post_user_info {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    .post_user_info {
+    margin-bottom: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.23);
+    border-radius: 8px;
+    padding: 8px 5px;
+    .user_flex {
       display: flex;
-      gap: 14px;
+      gap: 20px;
+      align-items: center;
+    }
+    .showmore_btn {
+      .close {
+        height: 24px;
+        cursor: pointer;
+        text-align: right;
+
+        margin-bottom: 5px;
+        font-size: 16px;
+        transition: all 0.3s;
+        :hover {
+          font-size: 18px;
+        }
+      }
+      .more {
+        width: 50px;
+        position: relative;
+        .circle_box {
+          height: 30px;
+          cursor: pointer;
+          transform: translateY(50%);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 2px;
+          border: none;
+          .circle {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background-color: #b7bbc7;
+          }
+        }
+      }
+      .option {
+        transition: all 0.4s;
+        border-bottom: 1px solid rgba(69, 79, 93, 0.07);
+        border-radius: 4px;
+        padding: 0 5px;
+        box-sizing: border-box;
+        margin-bottom: 4px;
+        :hover {
+          background-color: #eee;
+          border-bottom: 1px solid rgba(69, 79, 93, 0.15);
+        }
+      }
+    }
+  }
+  .content {
+    cursor: default;
+    form {
+      .input_box {
+        input {
+          width: 100%;
+          outline: none;
+          border: 1px solid rgba(69, 79, 93, 0.4);
+          border-radius: 5px;
+          margin-bottom: 10px;
+        }
+        .error {
+          color: red;
+          font-size: 13px;
+        }
+      }
+      .btn_group {
+        display: flex;
+        justify-content: end;
+        gap: 20px;
+        button {
+          outline: none;
+          border: none;
+          background-color: #eee;
+          border: 1px solid rgba(69, 79, 93, 0.15);
+          border-radius: 7px;
+          :hover {
+            background-color: #ddd;
+          }
+        }
+      }
     }
   }
 `;

@@ -87,25 +87,25 @@ const MiniUser = (props) => {
 
   return (
     <StMiniUser>
-      <div className='profile_box'>
+      <div className="profile_box">
         <UserProfile userprofile={info.userprofile} />
         <Username isme={true} username={info.username} inPost={false} />
-        <button type='button' onClick={onLogoutHandler}>
+        <button type="button" onClick={onLogoutHandler}>
           Logout
         </button>
       </div>
-      <div className='info_box'>
-        <div className='info_item'>
-          <div className='title'>Posts</div>
-          <div className='total'>{info.numposts}</div>
+      <div className="info_box">
+        <div className="info_item">
+          <div className="title">Posts</div>
+          <div className="total">{info.numposts}</div>
         </div>
-        <div className='info_item'>
-          <div className='title'>Following</div>
-          <div className='total'>{info.numfollowing}</div>
+        <div className="info_item">
+          <div className="title">Following</div>
+          <div className="total">{info.numfollowing}</div>
         </div>
-        <div className='info_item'>
-          <div className='title'>Follwers</div>
-          <div className='total'>{info.numfollowers}</div>
+        <div className="info_item">
+          <div className="title">Follwers</div>
+          <div className="total">{info.numfollowers}</div>
         </div>
       </div>
     </StMiniUser>
@@ -118,12 +118,13 @@ const StMiniUser = styled.div`
   width: 270px;
   box-shadow: rgb(0 0 0 / 23%) 3px 3px 8px 0px;
   .profile_box {
-    height: 60px;
+    height: 75px;
     border-bottom: 2px solid rgba(0, 0, 0, 0.23);
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 5px 10px;
+    /* margin-bottom: 5px; */
     button {
       width: 55px;
       height: 30px;
@@ -134,14 +135,17 @@ const StMiniUser = styled.div`
       align-items: center;
       border-radius: 7px;
       cursor: pointer;
+      padding: 0 5px;
+      font-size: 14px;
       transition: all 0.4s;
       :hover {
-        background-color: #393838;
+        background-color: #737171;
         color: #fff;
       }
     }
   }
   .info_box {
+    /* margin-top: 13px; */
     padding: 5px 0 15px 0;
     display: flex;
     .info_item {

@@ -5,7 +5,7 @@ import RESP from "../../server/response";
 import Post from "./Post";
 // TODO dispatch to create
 // TODO infinite scroll 구현 with currPageNum
-const Posts = ({ onProfile, username }) => {
+const Posts = ({ onProfile, username, targetId, goInfo }) => {
   const [currPageNum, setCurrPageNum] = useState(1);
   const [pageLimit, setPageLimit] = useState(5);
   const [allPosts, setAllPosts] = useState([]);
@@ -14,6 +14,8 @@ const Posts = ({ onProfile, username }) => {
     totalpage: 0,
     currcontent: 0,
   });
+
+  // const [goDetail, setGoDetail] = useState(false)
 
   // TODO 코드 반복되는 부분 예쁘게 정리하기!
   const getPosts = async (pageNum, pageLimit, username) => {
@@ -98,10 +100,14 @@ const Posts = ({ onProfile, username }) => {
     getPosts(currPageNum, pageLimit, username);
   }, []);
 
-  const postList = allPosts.map((post) => <Post key={post.id} {...post} />);
+  const postList =
+    targetId === undefined
+      ? allPosts.map((post) => <Post key={post.id} {...post} />)
+      : allPosts
+          .filter((post) => post.id === parseInt(targetId))
+          .map((post) => <Post key={post.id} {...post} goDetail={true} />);
 
-  // )
-
+  // console.log(postList);
   return (
     <>
       <div>{postList}</div>
