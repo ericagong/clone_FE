@@ -1,9 +1,14 @@
-import Comments from "./Comments";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 
+import Comments from "./Comments";
+
 const CommentsLayout = () => {
+  const isLogin = useSelector((state) => state.user.isLogin);
+
   return (
     <StComments>
+      {isLogin ? <div>create</div> : null}
       <Comments />
     </StComments>
   );

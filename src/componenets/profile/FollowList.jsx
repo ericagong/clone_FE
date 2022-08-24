@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import { apis } from "../../shared/axios";
 import RESP from "../../server/response";
@@ -6,18 +6,19 @@ import FollowInfo from "./FollowInfo";
 
 // TODO infinite scroll 구현 with currPageNum
 const FollowList = ({ username, curr }) => {
-  const [currPageNum, setCurrPageNum] = useState(1);
-  const [pageLimit, setPageLimit] = useState(5);
   const [allFollowList, setAllFollowList] = useState([]);
   const [pageInfo, setPageInfo] = useState({
     currpage: 0,
-    totalpage: 0,
+    totalpage: 1,
     currcontent: 0,
     totalelements: 0,
     isme: false,
   });
 
-  const getFollowList = async (pageNum, pageLimit, username) => {
+  const currPageNum = useRef(1);
+  const pageLimit = useRef(5);
+
+  const getFollowList = async () => {
     if (curr === "Followings") {
       // const resp = await apis.get_profile_followings(
       //   username,
@@ -59,8 +60,9 @@ const FollowList = ({ username, curr }) => {
 
       const { following, ...rest } = output;
 
-      setAllFollowList([...allFollowList, ...following]);
+      setAllFollowList((prev) => [...prev, ...following]);
       setPageInfo({ ...pageInfo, ...rest });
+      currPageNum.current += 1;
     }
     // curr === 'Followers'
     else {
@@ -104,14 +106,18 @@ const FollowList = ({ username, curr }) => {
 
       const { followers, ...rest } = output;
 
-      setAllFollowList([...allFollowList, ...followers]);
+      setAllFollowList((prev) => [...prev, ...followers]);
       setPageInfo({ ...pageInfo, ...rest });
     }
   };
 
   useEffect(() => {
-    getFollowList(currPageNum, pageLimit, username);
+    getFollowList();
   }, []);
+
+  const getMore = () => {
+    getFollowList();
+  };
 
   const followingList = allFollowList.map((followInfo) => (
     <FollowInfo
@@ -122,10 +128,17 @@ const FollowList = ({ username, curr }) => {
     />
   ));
 
+  console.log(pageInfo.currpage, pageInfo.totalpage);
+
   return (
     <>
       <div>{`${pageInfo.totalelements} ${curr}`}</div>
       <div>{followingList}</div>
+      {pageInfo.currpage !== pageInfo.totalpage ? (
+        <button type='button' onClick={getMore}>
+          get more
+        </button>
+      ) : null}
     </>
   );
 };

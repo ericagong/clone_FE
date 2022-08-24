@@ -37,15 +37,15 @@ const SearchBar = (props) => {
   return (
     <StSearchBar>
       <form onSubmit={handleSubmit(onSubmitHandler)}>
-        <div className="hash_input_box">
-          <label htmlFor="search" className="search">
+        <div className='hash_input_box'>
+          <label htmlFor='search' className='search'>
             <FaSearch />
           </label>
           <input
-            type="text"
-            placeholder="#hashtag"
-            className="search_input"
-            id="search"
+            type='text'
+            placeholder='#hashtag'
+            className='search_input'
+            id='search'
             {...register("keyword", {
               required: "You should type keyword for hashtag search.",
               validate: {
@@ -61,7 +61,7 @@ const SearchBar = (props) => {
           />
         </div>
         {errors.keyword ? (
-          <div className="error">{errors.keyword.message}</div>
+          <div className='error'>{errors.keyword.message}</div>
         ) : null}
       </form>
     </StSearchBar>
