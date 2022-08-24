@@ -23,9 +23,9 @@ const ImgView = ({ imgUrls }) => {
           <FaChevronCircleRight className="icon_right" onClick={clickNext} />
         </div>
         <img src={imgUrls[currImg]} alt="img" />
-        <div className="img_page">
+        {/* <div className="img_page">
           {currImg + 1}/ {lastImg + 1}
-        </div>
+        </div> */}
       </div>
     </StImgView>
   );
@@ -48,18 +48,20 @@ const StImgView = styled.div`
       justify-content: space-between;
       .icon_left {
         font-size: 24px;
-        fill: #f6f6f6;
+        fill: #7e7d7d;
         opacity: 0.5;
         transition: all 0.4s;
+        cursor: pointer;
         :hover {
           opacity: 0.9;
         }
       }
       .icon_right {
         font-size: 24px;
-        fill: #f6f6f6;
+        fill: #7e7d7d;
         opacity: 0.5;
         transition: all 0.4s;
+        cursor: pointer;
         :hover {
           opacity: 0.9;
         }
@@ -67,11 +69,9 @@ const StImgView = styled.div`
     }
     img {
       width: 100%;
-    }
-    .img_page {
-      text-align: center;
-      margin-top: 5px;
-      border: 1px solid #eee;
+      margin-bottom: 15px;
+      box-sizing: border-box;
+      padding: 0 25px;
     }
   }
 `;

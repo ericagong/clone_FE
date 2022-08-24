@@ -19,7 +19,7 @@ const HomeLayout = (props) => {
         {isLogin ? <MiniUser /> : <MiniLogin />}
       </div>
       <div id="center">
-        <Posts onProfile={false} />
+        <Posts onProfile={false} goDetail={true} />
       </div>
       <Rank />
     </StHomeLayout>
@@ -32,7 +32,4 @@ const StHomeLayout = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  /* #right {
-    background-color: yellowgreen;
-  } */
 `;
