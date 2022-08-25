@@ -3,14 +3,13 @@ import { useState } from "react";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 
 import { apis } from "../shared/axios";
-import RESP from "../server/response";
+// import RESP from "../server/response";
 import styled from "styled-components";
 
-const LikeBtn = ({ isliked }) => {
+const LikeBtn = ({ isliked, id }) => {
   const isLogin = useSelector((state) => state.user.isLogin);
   const [isLiked, setIsLiked] = useState(isliked);
 
-  // 서버에 요청만 보내고, 리렌더링 하지 않고 토글처리만 하기!
   const toggleLike = async () => {
     if (!isLogin) {
       alert("Sorry. Only logged in user can like post.");
@@ -18,14 +17,17 @@ const LikeBtn = ({ isliked }) => {
     }
 
     if (!isLiked) {
-      // const resp = await apis.like_post(id);
-      // const { result, status: { message } } = resp.data;
-
-      // success
+      const resp = await apis.like_post(id);
       const {
         result,
         status: { message },
-      } = RESP.POST.LIKE_SUCCESS;
+      } = resp.data;
+
+      // success
+      // const {
+      //   result,
+      //   status: { message },
+      // } = RESP.POST.LIKE_SUCCESS;
 
       // fail
       // const { result, status: { message } } = RESP.POST.LIKE_FAIL;
@@ -39,14 +41,17 @@ const LikeBtn = ({ isliked }) => {
 
       setIsLiked(true);
     } else {
-      // const resp = await apis.unlike_post(id);
-      // const { result, status: { message } } = resp.data;
-
-      // success
+      const resp = await apis.unlike_post(id);
       const {
         result,
         status: { message },
-      } = RESP.POST.UNLIKE_SUCCESS;
+      } = resp.data;
+
+      // success
+      // const {
+      //   result,
+      //   status: { message },
+      // } = RESP.POST.UNLIKE_SUCCESS;
 
       // fail
       // const { result, status: { message } } = RESP.POST.UNLIKE_FAIL;
@@ -65,12 +70,12 @@ const LikeBtn = ({ isliked }) => {
   return (
     <StLikeBtn>
       {!isLiked ? (
-        <button type="button" onClick={toggleLike}>
-          <FaRegHeart className="like" />
+        <button type='button' onClick={toggleLike}>
+          <FaRegHeart className='like' />
         </button>
       ) : (
-        <button type="button" onClick={toggleLike}>
-          <FaHeart className="unlike" />
+        <button type='button' onClick={toggleLike}>
+          <FaHeart className='unlike' />
         </button>
       )}
     </StLikeBtn>

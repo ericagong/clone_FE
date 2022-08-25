@@ -1,21 +1,20 @@
 import { useEffect, useState } from "react";
 
 import { apis } from "../../shared/axios";
-import RESP from "../../server/response";
+// import RESP from "../../server/response";
 import styled from "styled-components";
 
 const Rank = (props) => {
   const [rank, setRank] = useState([]);
   const [isInit, setIsinit] = useState(false);
 
-  // TODO check await
   const getRank = async () => {
-    // const resp = await apis.get_rank();
-    // const {
-    //   result,
-    //   status: { message },
-    //   output,
-    // } = resp.data;
+    const resp = await apis.get_rank();
+    const {
+      result,
+      status: { message },
+      output,
+    } = resp.data;
 
     // success : init
     // const {
@@ -25,11 +24,11 @@ const Rank = (props) => {
     // } = RESP.RANK.GET_INIT;
 
     // success : not-init
-    const {
-      result,
-      status: { message },
-      output,
-    } = RESP.RANK.GET_SUCCESS;
+    // const {
+    //   result,
+    //   status: { message },
+    //   output,
+    // } = RESP.RANK.GET_SUCCESS;
 
     const { hashtags } = output;
 
@@ -48,25 +47,25 @@ const Rank = (props) => {
   }, []);
 
   const hashtagList = rank.map((item, i) => (
-    <div className="tag" key={i}>
-      <div className="tag_box">
-        <div className="s_title">{item[0]}</div>
-        <div className="tag_item">{item[1]} posts</div>
+    <div className='tag' key={i}>
+      <div className='tag_box'>
+        <div className='s_title'>{item[0]}</div>
+        <div className='tag_item'>{item[1]} posts</div>
       </div>
     </div>
   ));
 
   return (
     <StRank>
-      <div className="rank_position">
-        <div className="rank_title">Popular Hashtags</div>
+      <div className='rank_position'>
+        <div className='rank_title'>Popular Hashtags</div>
         {isInit ? (
-          <div className="init_hashList">
+          <div className='init_hashList'>
             <p>You are our first user!</p>
             <p>Create Post to see Rank!</p>
           </div>
         ) : (
-          <div className="tag_list">{hashtagList}</div>
+          <div className='tag_list'>{hashtagList}</div>
         )}
       </div>
     </StRank>

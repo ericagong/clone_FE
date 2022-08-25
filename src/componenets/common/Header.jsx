@@ -8,7 +8,7 @@ import SearchBar from "../../elements/SearchBar";
 import UserProfile from "../../elements/UserProfile";
 import { useEffect, useState } from "react";
 
-// TODO header check 
+// TODO header check
 const Header = () => {
   const isLogin = useSelector((state) => state.user.isLogin);
 
@@ -64,26 +64,26 @@ const Header = () => {
   // console.log(info);
   return (
     <StHeader>
-      <div className="header">
-        <Link to="/home" style={{ textDecoration: "none" }}>
-          <div className="logo">5witter</div>
+      <div className='header'>
+        <Link to='/home' style={{ textDecoration: "none" }}>
+          <div className='logo'>5witter</div>
         </Link>
-        <SearchBar className="searchbar"></SearchBar>
-        <div className="menu">
-          <Link to="/">
-            <div className="home">
-              <FaHome className="svg" />
+        <SearchBar className='searchbar'></SearchBar>
+        <div className='menu'>
+          <Link to='/'>
+            <div className='home'>
+              <FaHome className='svg' />
             </div>
           </Link>
           {isLogin ? (
             <>
-              <Link to="/create" style={{ textDecoration: "none" }}>
-                <div className="create">
-                  <FaRegPlusSquare className="svg" />
+              <Link to='/create' style={{ textDecoration: "none" }}>
+                <div className='create'>
+                  <FaRegPlusSquare className='svg' />
                 </div>
               </Link>
-              <Link to="/profile/" style={{ textDecoration: "none" }}>
-                <div className="profile">
+              <Link to='/profile/' style={{ textDecoration: "none" }}>
+                <div className='profile'>
                   <UserProfile userprofile={info.userprofile} inHeader={true} />
                 </div>
               </Link>

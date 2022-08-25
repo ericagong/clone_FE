@@ -46,31 +46,31 @@ const Content = ({
     <StContent>
       <div>
         <div>
-          <div className="content">{content}</div>
+          <div className='content'>{content}</div>
         </div>
-        <div className="icon_box">
+        <div className='icon_box'>
           <div>
-            <LikeBtn isliked={isliked} />
-            <div className="like_num">
+            <LikeBtn isliked={isliked} id={id} />
+            <div className='like_num'>
               좋아요 <span>{numlikes}</span>개
             </div>
           </div>
           <div>
             {!showComment ? (
-              <button type="button" onClick={toggleComment}>
-                <FiMessageCircle className="full" />
+              <button type='button' onClick={toggleComment}>
+                <FiMessageCircle className='full' />
               </button>
             ) : (
-              <button type="button" onClick={toggleComment}>
-                <FiMessageCircle className="unfull" />
+              <button type='button' onClick={toggleComment}>
+                <FiMessageCircle className='unfull' />
               </button>
             )}
-            <div className="comment_num">댓글 {numcomments}개</div>
+            <div className='comment_num'>댓글 {numcomments}개</div>
           </div>
         </div>
         <div>
           <div>{showComment ? <CommentsLayout /> : null}</div>
-          <div className="time">{time}</div>
+          <div className='time'>{time}</div>
         </div>
       </div>
     </StContent>
