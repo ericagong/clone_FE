@@ -14,15 +14,7 @@ import CommentsLayout from "../comment/CommentsLayout";
 // TODO reducer C, U, D 연결
 // TODO 더보기 버튼 위로 빼기!!
 // TODO store값 변경 안해주고 그냥 프론트 독단으로 처리해도 되는지?
-const Content = ({
-  content,
-  isliked,
-  numlikes,
-  numcomments,
-  id,
-  time,
-  goDetail,
-}) => {
+const Content = ({ content, isliked, numlikes, numcomments, id, time }) => {
   const isLogin = useSelector((state) => state.user.isLogin);
 
   const [showComment, setShowComment] = useState(false);

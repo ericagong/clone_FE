@@ -6,8 +6,8 @@ const base = {
 };
 
 const api = axios.create({
-  // baseURL: "https://sparta-omj.shop",
-  baseURL: base.server_http,
+  baseURL: "https://sparta-omj.shop",
+  // baseURL: base.server_http,
   headers: {
     "content-type": "application/json; charset=UTF-8",
     accept: "application/json,",
@@ -83,7 +83,7 @@ export const apis = {
 
   // search : search result
   get_search_result: (tag, pageNum, pageLimit) =>
-    api.post(`/api/hashtag?pageNum=${pageNum}&pageLimit=${pageLimit}`, { tag }),
+    api.post(`/api/hashtag?pageNum=${pageNum}&pageLimit=${pageLimit}`, tag),
   // rank : hashtag ranking
   get_rank: () => api.get("api/hashtag/rank"),
 
