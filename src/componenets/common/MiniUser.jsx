@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
 import { apis } from "../../shared/axios";
-import RESP from "../../server/response";
+// import RESP from "../../server/response";
 import { logout } from "../../modules/redux/user";
 import UserProfile from "../../elements/UserProfile";
 import Username from "../../elements/Username";
@@ -53,8 +53,6 @@ const MiniUser = (props) => {
     });
   };
 
-  console.log(info);
-
   useEffect(() => {
     getProfileInfo();
   }, []);
@@ -77,6 +75,10 @@ const MiniUser = (props) => {
     //   result,
     //   status: { message },
     // } = RESP.AUTH.LOGOUT_FAIL;
+
+    if (!result) {
+      alert(message);
+    }
 
     dispatch(logout());
 
