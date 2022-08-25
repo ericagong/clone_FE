@@ -6,8 +6,8 @@ const base = {
 };
 
 const api = axios.create({
-  baseURL: "https://sparta-omj.shop",
-  // baseURL: base.server_http,
+  // baseURL: "https://sparta-omj.shop",
+  baseURL: base.server_http,
   headers: {
     "content-type": "application/json; charset=UTF-8",
     accept: "application/json,",
@@ -45,11 +45,12 @@ export const apis = {
   // post : CRUD, like/unlike
   // CRUD
   create_post: (content, files, hashtags) => {
-    console.log(files);
     const formData = new FormData();
     formData.append("content", content);
-    formData.append("files", files);
     formData.append("hashtags", hashtags);
+    for (let i = 0; i < files.length; i++) {
+      formData.append("files", files[i]);
+    }
 
     return api.post("/api/post", formData, {
       headers: {
