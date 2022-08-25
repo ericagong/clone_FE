@@ -104,5 +104,7 @@ export const apis = {
 
   // follow : follow/unfollow
   follow_user: (username) => api.post(`api/user/follow`, { username }),
-  unfollow_user: (username) => api.post(`api/user/unfollow`, { username }),
+  // TODO delete 요청
+  unfollow_user: (username) =>
+    api.delete(`api/user/unfollow`, { data: { username } }),
 };
