@@ -86,8 +86,6 @@ const ResultPosts = (props) => {
 
   const postList = allPosts.map((post) => <Post key={post.id} {...post} />);
 
-  console.log(tag);
-
   return (
     <>
       <div>{postList}</div>
