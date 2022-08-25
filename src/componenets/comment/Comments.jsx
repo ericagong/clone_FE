@@ -74,14 +74,14 @@ const Comments = (props) => {
 
   return (
     <StComments>
-      <p className='comments_header'>
+      <p className="comments_header">
         <span>{pageInfo.totalelements}</span>개 Comments
       </p>
       <div>{commentList}</div>
-      <div className='btn_G'>
+      <div className="btn_G">
         {pageInfo.totalelements !== 0 &&
         pageInfo.currpage !== pageInfo.totalpage ? (
-          <button onClick={getMore} className='more'>
+          <button onClick={getMore} className="more">
             get more
           </button>
         ) : null}
@@ -93,7 +93,7 @@ const Comments = (props) => {
 export default Comments;
 
 const StComments = styled.div`
-  background-color: pink;
+  /* background-color: pink; */
   width: 100%;
   .comments_header {
     margin-bottom: 5px;

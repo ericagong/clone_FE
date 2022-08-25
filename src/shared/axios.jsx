@@ -12,7 +12,7 @@ const api = axios.create({
     "content-type": "application/json; charset=UTF-8",
     accept: "application/json,",
     // origin: "http://localhost:3000",
-    // withCredentials: true,
+    withCredentials: true,
   },
 });
 
