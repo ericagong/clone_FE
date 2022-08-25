@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import { apis } from "../../shared/axios";
 import RESP from "../../server/response";
@@ -10,9 +10,8 @@ import Post from "../post/Post";
 const ResultPosts = (props) => {
   const { hashtag } = useParams();
 
-  const [keyword, setKeyword] = useState(`#${hashtag}`);
-  const [currPageNum, setCurrPageNum] = useState(1);
-  const [pageLimit, setPageLimit] = useState(5);
+  const [tag, setTag] = useState(`#${hashtag}`);
+
   const [allPosts, setAllPosts] = useState([]);
   const [pageInfo, setPageInfo] = useState({
     currpage: 0,
@@ -20,17 +19,28 @@ const ResultPosts = (props) => {
     currcontent: 0,
   });
 
-  // TODO 코드 반복되는 부분 예쁘게 정리하기!
-  const getPosts = async (pageNum, pageLimit, tag) => {
-    // const resp = await apis.get_search_result(tag, pageNum, pageLimit);
-    // const { result, status: { message }, output } = resp.data;
+  const currPageNum = useRef(1);
+  const pageLimit = useRef(5);
+  const hasMorePosts = useRef(true);
 
-    // success
+  const getPosts = async () => {
+    const resp = await apis.get_search_result(
+      tag,
+      currPageNum.current,
+      pageLimit.current
+    );
     const {
       result,
       status: { message },
       output,
-    } = RESP.SEARCH.GET_SUCCESS;
+    } = resp.data;
+
+    // success
+    // const {
+    //   result,
+    //   status: { message },
+    //   output,
+    // } = RESP.SEARCH.GET_SUCCESS;
 
     // fail
     // const {
@@ -47,15 +57,36 @@ const ResultPosts = (props) => {
 
     const { posts, ...rest } = output;
 
-    setAllPosts([...allPosts, ...posts]);
+    setAllPosts((prev) => [...prev, ...posts]);
     setPageInfo({ ...pageInfo, ...rest });
+    currPageNum.current += 1;
+    hasMorePosts.current = rest.currpage !== rest.totalpage;
   };
 
   useEffect(() => {
-    getPosts(currPageNum, pageLimit);
+    getPosts();
   }, []);
 
+  useEffect(() => {
+    const onScorll = () => {
+      const threshold = 10;
+      const shouldCall =
+        window.scrollY + document.documentElement.clientHeight >
+        document.documentElement.scrollHeight - threshold;
+      if (shouldCall && hasMorePosts.current) {
+        getPosts();
+      }
+    };
+    window.addEventListener("scroll", onScorll);
+
+    return () => {
+      window.removeEventListener("scroll", onScorll);
+    };
+  }, [getPosts]);
+
   const postList = allPosts.map((post) => <Post key={post.id} {...post} />);
+
+  console.log(tag);
 
   return (
     <>

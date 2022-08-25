@@ -83,8 +83,7 @@ export const apis = {
 
   // search : search result
   get_search_result: (tag, pageNum, pageLimit) =>
-    api.get(`/api/hashtag/${tag}&pageNum=${pageNum}&pageLimit=${pageLimit}`),
-
+    api.post(`/api/hashtag?pageNum=${pageNum}&pageLimit=${pageLimit}`, { tag }),
   // rank : hashtag ranking
   get_rank: () => api.get("api/hashtag/rank"),
 
