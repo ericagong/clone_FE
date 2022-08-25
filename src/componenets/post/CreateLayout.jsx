@@ -3,12 +3,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaPaperclip } from "react-icons/fa";
 import { IoIosClose } from "react-icons/io";
+import styled from "styled-components";
 
 import { apis } from "../../shared/axios";
 // import RESP from "../../server/response";
+import { HOME_PATH } from "../../shared/paths";
 import { parseHashtags, notEmptyCheck } from "../../shared/regex";
 import ImgView from "./ImgView";
-import styled from "styled-components";
 
 const CreateLayout = (props) => {
   const {
@@ -56,7 +57,7 @@ const CreateLayout = (props) => {
 
     // reset({ content: "", files: [] });
     alert(message);
-    navigate("/home");
+    navigate(`${HOME_PATH}`);
   };
 
   const changeImg = async (e) => {
@@ -101,18 +102,17 @@ const CreateLayout = (props) => {
             <div className='error'>{errors.content.message}</div>
           ) : null}
         </div>
+        {/* TODO label how to click? */}
         <div className='input_imgbox'>
-          <label htmlFor='img-file' className='input-file'>
+          {/* <label htmlFor='files' className='input-file'>
             <FaPaperclip />
-          </label>
+          </label> */}
           <input
             {...register("files")}
-            id='img-file'
             type='file'
             accept='image/jpg, image/png, image/jpeg'
             multiple
             onChange={changeImg}
-            style={{ display: "none" }}
           />
           <button type='submit'>Create</button>
         </div>

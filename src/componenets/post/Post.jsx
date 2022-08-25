@@ -17,7 +17,7 @@ import styled from "styled-components";
 // TODO code spliting!
 const Post = ({
   userprofile,
-  imageUrls,
+  imageurls,
   username,
   time,
   content,
@@ -248,7 +248,7 @@ const Post = ({
             </div>
 
             <div>
-              {imageUrls.length !== 0 ? <ImgView imgUrls={imageUrls} /> : null}
+              {imageurls.length !== 0 ? <ImgView imgUrls={imageurls} /> : null}
             </div>
 
             <div className='post_user_box'></div>
