@@ -23,7 +23,7 @@ const FollowList = ({ username, curr }) => {
   const getFollowList = async () => {
     if (curr === "Followings") {
       const resp = await apis.get_profile_followings(
-        username,
+        username || "",
         currPageNum.current,
         pageLimit.current
       );
@@ -65,7 +65,6 @@ const FollowList = ({ username, curr }) => {
       setAllFollowList((prev) => [...prev, ...following]);
       setPageInfo({ ...pageInfo, ...rest });
       currPageNum.current += 1;
-      hasMoreInfo.current = pageInfo.currpage !== pageInfo.totalpage;
     }
     // curr === 'Followers'
     else {
@@ -112,13 +111,12 @@ const FollowList = ({ username, curr }) => {
       setAllFollowList((prev) => [...prev, ...followers]);
       setPageInfo({ ...pageInfo, ...rest });
       currPageNum.current += 1;
-      hasMoreInfo.current = pageInfo.currpage !== pageInfo.totalpage;
     }
   };
 
   useEffect(() => {
     getFollowList();
-  }, [getFollowList]);
+  }, []);
 
   const getMore = () => {
     getFollowList();

@@ -95,11 +95,11 @@ export const apis = {
     ),
   get_profile_followings: (username, pageNum, pageLimit) =>
     api.get(
-      `/api/profile/following?username=${username}pageNum=${pageNum}&pageLimit=${pageLimit}`
+      `/api/profile/following?username=${username}&pageNum=${pageNum}&pageLimit=${pageLimit}`
     ),
   get_profile_followers: (username, pageNum, pageLimit) =>
     api.get(
-      `/api/profile/followers?username=${username}pageNum=${pageNum}&pageLimit=${pageLimit}`
+      `/api/profile/followers?username=${username}&pageNum=${pageNum}&pageLimit=${pageLimit}`
     ),
 
   // follow : follow/unfollow
