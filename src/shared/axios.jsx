@@ -62,8 +62,9 @@ export const apis = {
   edit_post: (id, content, hashtags) => {
     api.put(`/api/post/${id}`, { content, hashtags });
   },
-  delete_post: (id) => {
-    api.delete(`/api/post/${id}`);
+  delete_post: async (id) => {
+    const resp = await api.delete(`/api/post/${id}`);
+    return resp;
   },
   // like, unlike
   like_post: (id) => {

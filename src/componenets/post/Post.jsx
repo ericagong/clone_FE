@@ -119,16 +119,9 @@ const Post = ({
     setInEdit((prev) => !prev);
   };
 
-  // TODO store값 변경 안해주고 그냥 프론트 독단으로 처리해도 되는지?
-  const clickDelete = async () => {
-    // const resp = await apis.delete_post(id);
-    // const {
-    //   result,
-    // 	status: { message },
-    // } = resp.data;
 
-    // success
-
+  const clickDelete = () => {
+    const resp = apis.delete_post(id);
     const {
       result,
       status: { message },
