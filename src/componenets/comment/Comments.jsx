@@ -1,13 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
-import RESP from "../../server/response";
+// import RESP from "../../server/response";
 import { apis } from "../../shared/axios";
 import Comment from "./Comment";
 
 const Comments = (props) => {
-  const [currPageNum, setCurrPageNum] = useState(1);
   const [allComments, setAllComments] = useState([]);
+
+  const { id } = useParams();
+
   const [pageInfo, setPageInfo] = useState({
     currpage: 0,
     totalpage: 0,
@@ -15,18 +18,21 @@ const Comments = (props) => {
     totalelements: 0,
   });
 
-  const getComments = async (postId, pageNum, pageLimit) => {
-    const resp = await apis.get_comments(postId, pageNum, pageLimit);
+  const currPageNum = useRef(1);
+  const pageLimit = useRef(5);
+
+  const getComments = async () => {
+    const resp = await apis.get_comments(
+      id,
+      currPageNum.current,
+      pageLimit.current
+    );
 
     const {
       result,
       status: { message },
       output,
     } = resp.data;
-
-    console.log(`getComments called!`);
-    console.log(`\t pageNum: ${currPageNum.current}`);
-    console.log(`\t pageLimit: ${pageLimit.current}`);
 
     //success
     // const {
@@ -51,7 +57,7 @@ const Comments = (props) => {
 
     setAllComments([...allComments, ...comments]);
     setPageInfo({ pageInfo, ...rest });
-    // currPageNum.current += 1
+    currPageNum.current += 1;
   };
 
   useEffect(() => {
@@ -68,19 +74,17 @@ const Comments = (props) => {
 
   return (
     <StComments>
-      <p className="comments_header">
+      <p className='comments_header'>
         <span>{pageInfo.totalelements}</span>개 Comments
       </p>
       <div>{commentList}</div>
-      {/* {pageInfo.currpage !== pageInfo.totalpage ? (
-        <button onClick={getMore} className="more">
-          get more
-        </button>
-      ) : null} */}
-      <div className="btn_G">
-        <button onClick={getMore} className="more">
-          get more
-        </button>
+      <div className='btn_G'>
+        {pageInfo.totalelements !== 0 &&
+        pageInfo.currpage !== pageInfo.totalpage ? (
+          <button onClick={getMore} className='more'>
+            get more
+          </button>
+        ) : null}
       </div>
     </StComments>
   );

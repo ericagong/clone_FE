@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 
 import { apis } from "../../shared/axios";
-import RESP from "../../server/response";
+// import RESP from "../../server/response";
 import Post from "./Post";
 
 // TODO check hasMorePosts!
@@ -26,7 +26,6 @@ const Posts = ({ onProfile, username, targetId }) => {
         status: { message },
         output,
       } = resp.data;
-
 
       // console.log(`getPosts called!`);
       // console.log(`\t pageNum: ${currPageNum.current}`);
