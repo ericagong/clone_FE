@@ -20,7 +20,7 @@ const Comments = (props) => {
 
     const {
       result,
-      statue: { message },
+      status: { message },
       output,
     } = resp.data;
 
