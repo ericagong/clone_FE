@@ -6,12 +6,13 @@ const base = {
 };
 
 const api = axios.create({
-  baseURL: "https://sparta-omj.shop",
-  // baseURL: base.server_https,
+  // baseURL: "https://sparta-omj.shop",
+  baseURL: base.server_http,
   headers: {
     "content-type": "application/json; charset=UTF-8",
     accept: "application/json,",
-    withCredentials: true,
+    // origin: "http://localhost:3000",
+    // withCredentials: true,
   },
 });
 
@@ -20,7 +21,7 @@ const api = axios.create({
 // 조건부 분기
 api.interceptors.request.use(function (config) {
   const auth = localStorage.getItem("AccessToken");
-  config.headers.common["Authentication"] = auth;
+  config.headers.common["Authorization"] = auth;
 
   // const accessToken = document.cookie.split("=")[1];
   // const refreshToken = document.cookie.split("=")[1];

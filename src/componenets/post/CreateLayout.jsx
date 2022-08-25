@@ -15,7 +15,6 @@ const CreateLayout = (props) => {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm({ mode: "onChange" });
 
@@ -33,14 +32,17 @@ const CreateLayout = (props) => {
 
     const hashtags = parseHashtags(content);
 
-    // const resp = await apis.create_post(content, files, hashtags);
-    // const { result, status: { message } } = resp.data;
-
-    // success
+    const resp = await apis.create_post(content, files, hashtags);
     const {
       result,
       status: { message },
-    } = RESP.POST.CREATE_SUCCESS;
+    } = resp.data;
+
+    // success
+    // const {
+    //   result,
+    //   status: { message },
+    // } = RESP.POST.CREATE_SUCCESS;
 
     // fail
     // const {
@@ -85,10 +87,10 @@ const CreateLayout = (props) => {
   return (
     <StCreate>
       <form onSubmit={handleSubmit(submitForm)}>
-        <div className="input_box">
+        <div className='input_box'>
           <input
-            type="text"
-            id="content"
+            type='text'
+            id='content'
             {...register("content", {
               required: "You should write content to create post.",
               maxLength: {
@@ -102,28 +104,27 @@ const CreateLayout = (props) => {
             })}
           />
           {errors.content ? (
-            <div className="error">{errors.content.message}</div>
+            <div className='error'>{errors.content.message}</div>
           ) : null}
         </div>
-        <div className="input_imgbox">
-          <label htmlFor="img-file" className="input-file">
+        <div className='input_imgbox'>
+          <label htmlFor='img-file' className='input-file'>
             <FaPaperclip />
           </label>
           <input
             {...register("files")}
-            id="img-file"
-            type="file"
-            accept="image/jpg, image/png, image/jpeg"
+            id='img-file'
+            type='file'
+            accept='image/jpg, image/png, image/jpeg'
             multiple
             onChange={changeImg}
             style={{ display: "none" }}
           />
-          <button type="submit">Create</button>
+          <button type='submit'>Create</button>
         </div>
-
         {!isLoading ? (
-          <div className="x_btn_flex">
-            <IoIosClose className="x_btn" onClick={onClickClose} />
+          <div className='x_btn_flex'>
+            <IoIosClose className='x_btn' onClick={onClickClose} />
           </div>
         ) : null}
 

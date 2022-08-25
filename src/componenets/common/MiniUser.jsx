@@ -53,6 +53,8 @@ const MiniUser = (props) => {
     });
   };
 
+  console.log(info);
+
   useEffect(() => {
     getProfileInfo();
   }, []);
