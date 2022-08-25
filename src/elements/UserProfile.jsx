@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
-const userProfile = ({ userprofile }) => {
+const userProfile = ({ userprofile, inHeader }) => {
+  // console.log(inHeader);
   return (
-    <StImgBox>
+    <StImgBox inHeader={inHeader}>
       <img src={userprofile} alt="profile" />
     </StImgBox>
   );
@@ -11,8 +12,8 @@ const userProfile = ({ userprofile }) => {
 export default userProfile;
 
 const StImgBox = styled.div`
-  width: 56px;
-  height: 56px;
+  width: ${(props) => (!props.inHeader ? "56px" : "25px")};
+  height: ${(props) => (!props.inHeader ? "56px" : "25px")};
   border-radius: 50%;
   background-color: #b9b9a9;
   overflow: hidden;
@@ -20,8 +21,8 @@ const StImgBox = styled.div`
   justify-content: center;
   align-items: center;
   img {
-    width: 56px;
-    height: 56px;
+    width: ${(props) => (!props.inHeader ? "56px" : "25px")};
+    height: ${(props) => (!props.inHeader ? "56px" : "25px")};
     object-fit: cover;
   }
 `;

@@ -42,11 +42,16 @@ const Comments = (props) => {
 
     setAllComments([...allComments, ...comments]);
     setPageInfo({ pageInfo, ...rest });
+    // currPageNum.current += 1
   };
 
   useEffect(() => {
     getComments();
   }, []);
+
+  const getMore = () => {
+    getComments();
+  };
 
   const commentList = allComments.map((comment) => (
     <Comment key={comment.id} {...comment} />
@@ -58,6 +63,16 @@ const Comments = (props) => {
         <span>{pageInfo.totalelements}</span>개 Comments
       </p>
       <div>{commentList}</div>
+      {/* {pageInfo.currpage !== pageInfo.totalpage ? (
+        <button onClick={getMore} className="more">
+          get more
+        </button>
+      ) : null} */}
+      <div className="btn_G">
+        <button onClick={getMore} className="more">
+          get more
+        </button>
+      </div>
     </StComments>
   );
 };
@@ -65,6 +80,7 @@ const Comments = (props) => {
 export default Comments;
 
 const StComments = styled.div`
+  /* background-color: pink; */
   width: 100%;
   .comments_header {
     margin-bottom: 5px;
@@ -74,6 +90,20 @@ const StComments = styled.div`
     span {
       font-size: 15px;
       font-weight: bold;
+    }
+  }
+  .btn_G {
+    display: flex;
+    justify-content: end;
+    .more {
+      outline: none;
+      border: none;
+      background-color: #eee;
+      border: 1px solid rgba(69, 79, 93, 0.15);
+      border-radius: 7px;
+      :hover {
+        background-color: #ddd;
+      }
     }
   }
 `;

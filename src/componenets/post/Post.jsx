@@ -11,6 +11,7 @@ import ImgView from "./ImgView";
 import UserProfile from "../../elements/UserProfile";
 import Username from "../../elements/Username";
 import Content from "./Content";
+import CreateComment from "../comment/CreateComment";
 
 // TODO content hashtag Link
 // TODO code spliting!
@@ -23,8 +24,10 @@ const Post = ({
   ismine,
   isfollowing,
   goDetail,
+  id,
   ...rest
 }) => {
+  // console.log("id :", id);
   const isLogin = useSelector((state) => state.user.isLogin);
 
   const [isFollowing, setIsFollowing] = useState(isfollowing);
@@ -179,6 +182,32 @@ const Post = ({
     setCurrContent(editContent);
   };
 
+  // comment C
+  // const submitCommentsForm = async ({ content }) => {
+  //   // const resp = await apis.create_comment(content, hashtags);
+  //   // const {
+  //   //   result,
+  //   // 	status: { message },
+  //   // } = resp.data;
+
+  //   //success
+  //   const {
+  //     result,
+  //     status: { message },
+  //   } = RESP.COMMENT.CREATE_SUCCESS;
+
+  //   //fail
+  //   // const{
+  //   //   result,
+  //   //   status:{message},
+  //   // } = RESP.COMMENT.CREATE_FAIL
+
+  //   if (!result) {
+  //     alert(message);
+  //     return;
+  //   }
+  // };
+
   return (
     <>
       {!isDeleted ? (
@@ -210,7 +239,7 @@ const Post = ({
                 {showMore ? (
                   <div>
                     {!ismine && !isFollowing ? (
-                      <div type='button' onClick={toggleFollow}>
+                      <div className="option" onClick={toggleFollow}>
                         Follow this user
                       </div>
                     ) : null}
@@ -241,12 +270,7 @@ const Post = ({
             <div className='post_user_box'></div>
             <div className='content'>
               {!inEdit ? (
-                <Content
-                  content={currContent}
-                  {...rest}
-                  time={time}
-                  goDetail={true}
-                />
+                <Content content={currContent} {...rest} time={time} id={id} />
               ) : (
                 <form onSubmit={handleSubmit(submitForm)}>
                   <div className='input_box'>
@@ -281,6 +305,7 @@ const Post = ({
               )}
             </div>
           </div>
+          {isLogin ? <CreateComment id={id} /> : null}
         </StPost>
       ) : null}
     </>
@@ -295,6 +320,7 @@ const StPost = styled.div`
   box-sizing: border-box;
   box-shadow: rgb(0 0 0 / 23%) 3px 3px 8px 0px;
   margin-bottom: 30px;
+  /* background-color: pink; */
   .post_user_info {
     display: flex;
     justify-content: space-between;
@@ -302,6 +328,7 @@ const StPost = styled.div`
     border: 1px solid rgba(0, 0, 0, 0.23);
     border-radius: 8px;
     padding: 8px 5px;
+    /* background-color: royalblue; */
     .user_flex {
       display: flex;
       gap: 20px;
@@ -355,15 +382,21 @@ const StPost = styled.div`
     }
   }
   .content {
+    /* background-color: yellowgreen; */
     cursor: default;
     form {
       .input_box {
         input {
+          height: 30px;
           width: 100%;
           outline: none;
           border: 1px solid rgba(69, 79, 93, 0.4);
           border-radius: 5px;
           margin-bottom: 10px;
+          padding: 0 5px;
+          :focus {
+            border: 2px solid #a5c7fe;
+          }
         }
         .error {
           color: red;

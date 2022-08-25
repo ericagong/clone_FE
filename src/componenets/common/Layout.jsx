@@ -5,23 +5,18 @@ const Layout = (props) => {
 };
 
 const Wrapper = styled.div`
-  width: 90vw;
-  max-width: 1200px;
+  max-width: 100%;
   min-width: 450px;
   position: relative;
   margin: auto;
-  box-sizing: border-box;
-  padding: 30px;
 
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   align-content: center;
 
-  background-color: "#FFFFFF";
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-  overflow: hidden;
+  background-color: rgb(250, 250, 250);
 `;
 
 export default Layout;

@@ -37,15 +37,12 @@ const SearchBar = (props) => {
   return (
     <StSearchBar>
       <form onSubmit={handleSubmit(onSubmitHandler)}>
-        <div className='hash_input_box'>
-          <label htmlFor='search' className='search'>
-            <FaSearch />
-          </label>
+        <div className="hash_input_box">
           <input
-            type='text'
-            placeholder='#hashtag'
-            className='search_input'
-            id='search'
+            type="text"
+            placeholder="#hashtag"
+            className="search_input"
+            id="search"
             {...register("keyword", {
               required: "You should type keyword for hashtag search.",
               validate: {
@@ -59,10 +56,11 @@ const SearchBar = (props) => {
               },
             })}
           />
+          {/* {errors.keyword ? (
+            <div className="error">{errors.keyword.message}</div>
+          ) : null} */}
+          <FaSearch className="icon" />
         </div>
-        {errors.keyword ? (
-          <div className='error'>{errors.keyword.message}</div>
-        ) : null}
       </form>
     </StSearchBar>
   );
@@ -81,31 +79,31 @@ const StSearchBar = styled.div`
   }
   .hash_input_box {
     height: 40px;
-    background-color: #fff;
+    background-color: rgb(239, 239, 239);
     display: flex;
+    align-items: center;
     border-radius: 8px;
-    overflow: hidden;
-    border: 1px solid rgb(204, 204, 204);
-    .search {
-      /* font-size: ; */
-      width: 40px;
-      height: 40px;
-      font-size: 22px;
-      text-align: center;
-      line-height: 40px;
-      background-color: #ededed;
+    gap: 5px;
+    color: rgb(239, 239, 239);
+    padding: 0 16px;
+    .icon {
+      font-size: 16px;
+      fill: rgb(142, 142, 142);
     }
     .search_input {
-      width: 0px;
+      width: 236px;
       padding: 0;
       background-color: transparent;
       border: none;
       outline: none;
       transition: width 0.4s;
       box-sizing: border-box;
-      :focus {
-        width: 160px;
-      }
+      /* :focus .icon {
+        display: none;
+      } */
     }
+  }
+  .search_input :focus .icon {
+    display: none;
   }
 `;

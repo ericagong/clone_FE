@@ -78,6 +78,10 @@ const CreateLayout = (props) => {
     setFileUrls([]);
   };
 
+  const goHome = () => {
+    navigate("/");
+  };
+
   return (
     <StCreate>
       <form onSubmit={handleSubmit(submitForm)}>
@@ -121,6 +125,11 @@ const CreateLayout = (props) => {
           </div>
         ) : null}
         {!isLoading ? <ImgView imgUrls={fileUrls} /> : null}
+        <div className="btn_div">
+          <button className="close" onClick={goHome}>
+            close
+          </button>
+        </div>
       </form>
     </StCreate>
   );
@@ -203,4 +212,54 @@ const StCreate = styled.div`
       }
     }
   }
+  .btn_div {
+    /* background-color: pink; */
+    display: flex;
+    justify-content: center;
+    .close {
+      width: 150px;
+      outline: none;
+      border: none;
+      background-color: #eee;
+      border: 1px solid rgba(69, 79, 93, 0.15);
+      border-radius: 7px;
+      :hover {
+        background-color: #ddd;
+      }
+    }
+  }
 `;
+
+// {isLogin ? (
+// <div className="create_comments">
+//   <form onSubmit={handleSubmit(submitForm)}>
+//     <div className="input_box">
+//       <input
+//         type="text"
+//         id="editContent"
+//         {...register("editContent", {
+//           required: "You should write content to edit post.",
+//           maxLength: {
+//             value: 1000,
+//             message: "Content should be shorter than 1000 characters.",
+//           },
+//           // validate: {
+//           //   notEmpty: (value) =>
+//           //     notEmptyCheck(value) || "Content cannot be empty string.",
+//           // },
+//         })}
+//       />
+//       {errors.editContent ? (
+//         <div className="error">{errors.editContent.message}</div>
+//       ) : null}
+//     </div>
+//     <div className="btn_group">
+//       <button type="submit">Save Post</button>
+//       <button type="button">
+//         {/* onClick={toggleEdit} */}
+//         Cancel
+//       </button>
+//     </div>
+//   </form>
+// </div>
+// ) : null}

@@ -36,6 +36,9 @@ const Content = ({
     }
   };
 
+  // console.log("temp :", temp);
+  // console.log("content에서 id", id);
+
   // 디테일 페이지이면 !null
   // 홈이면 null
 
@@ -43,31 +46,31 @@ const Content = ({
     <StContent>
       <div>
         <div>
-          <div className='content'>{content}</div>
+          <div className="content">{content}</div>
         </div>
-        <div className='icon_box'>
+        <div className="icon_box">
           <div>
             <LikeBtn isliked={isliked} />
-            <div className='like_num'>
+            <div className="like_num">
               좋아요 <span>{numlikes}</span>개
             </div>
           </div>
           <div>
             {!showComment ? (
-              <button type='button' onClick={toggleComment}>
-                <FiMessageCircle className='full' />
+              <button type="button" onClick={toggleComment}>
+                <FiMessageCircle className="full" />
               </button>
             ) : (
-              <button type='button' onClick={toggleComment}>
-                <FiMessageCircle className='unfull' />
+              <button type="button" onClick={toggleComment}>
+                <FiMessageCircle className="unfull" />
               </button>
             )}
-            <div className='comment_num'>댓글 {numcomments}개</div>
+            <div className="comment_num">댓글 {numcomments}개</div>
           </div>
         </div>
         <div>
           <div>{showComment ? <CommentsLayout /> : null}</div>
-          <div className='time'>{time}</div>
+          <div className="time">{time}</div>
         </div>
       </div>
     </StContent>
@@ -78,14 +81,12 @@ export default Content;
 
 const StContent = styled.div`
   width: 100%;
-  /* background-color: pink; */
   .time {
     font-size: 10px;
     color: rgb(142, 142, 142);
     margin-left: 5px;
   }
   .icon_box {
-    /* background-color: yellow; */
     width: 100%;
     height: 80px;
     padding: 0 5px;
@@ -96,7 +97,6 @@ const StContent = styled.div`
     button {
       width: 35px;
       height: 35px;
-      /* background-color: royalblue; */
       cursor: default;
       background-color: transparent;
       padding: 0;
@@ -107,6 +107,7 @@ const StContent = styled.div`
         transition: all 0.2s;
         stroke: #000;
         fill: transparent;
+        stroke-width: 1.5px;
         cursor: pointer;
         :hover {
           fill: rgb(142, 142, 142);
@@ -127,14 +128,12 @@ const StContent = styled.div`
     .like_num {
       position: absolute;
       left: 5px;
-      /* background-color: red; */
       font-size: 14px;
       span {
         font-weight: bold;
       }
     }
     .comment_num {
-      /* background-color: red; */
       position: absolute;
       top: 57px;
       left: 5px;
@@ -145,7 +144,6 @@ const StContent = styled.div`
   .content {
     width: 100%;
     height: 130px;
-    /* background-color: yellowgreen; */
     border: 1px solid rgba(0, 0, 0, 0.23);
     border-radius: 8px;
     box-sizing: border-box;

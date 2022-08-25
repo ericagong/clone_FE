@@ -4,6 +4,7 @@ import { apis } from "../../shared/axios";
 import RESP from "../../server/response";
 import UserProfile from "../../elements/UserProfile";
 import Username from "../../elements/Username";
+import styled from "styled-components";
 
 const UserDetail = ({ username }) => {
   const [info, setInfo] = useState({
@@ -56,14 +57,22 @@ const UserDetail = ({ username }) => {
   }, []);
 
   return (
-    <>
-      <div>
-        UserDetail
+    <StUserDetail>
+      <div className="top">
         <UserProfile userprofile={info.userprofile} />
         <Username isme={!username ? true : false} username={info.username} />
       </div>
-    </>
+    </StUserDetail>
   );
 };
 
 export default UserDetail;
+
+const StUserDetail = styled.div`
+  .top {
+    margin: 20px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+`;

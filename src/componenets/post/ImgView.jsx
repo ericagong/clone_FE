@@ -43,7 +43,6 @@ const StImgView = styled.div`
       width: 100%;
       position: absolute;
       top: 50%;
-      /* background-color: red; */
       display: flex;
       justify-content: space-between;
       .icon_left {
@@ -71,7 +70,7 @@ const StImgView = styled.div`
       width: 100%;
       margin-bottom: 15px;
       box-sizing: border-box;
-      padding: 0 25px;
+      padding: 0 30px;
     }
   }
 `;
