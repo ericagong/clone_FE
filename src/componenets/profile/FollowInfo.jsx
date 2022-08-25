@@ -17,17 +17,19 @@ const Following = ({
 }) => {
   const [isFollowing, setIsFollowing] = useState(true);
 
-  // 서버에 요청만 보내고, 리렌더링 하지 않고 토글처리만 하기!
   const toggleFollow = async () => {
     if (!isFollowing) {
-      // const resp = await apis.follow_user(username);
-      // const { result, status: { message } } = resp.data;
-
-      // success
+      const resp = await apis.follow_user(username);
       const {
         result,
         status: { message },
-      } = RESP.FOLLOW.FOLLOW_SUCCESS;
+      } = resp.data;
+
+      // success
+      // const {
+      //   result,
+      //   status: { message },
+      // } = RESP.FOLLOW.FOLLOW_SUCCESS;
 
       // fail
       // const { result, status: { message } } = RESP.FOLLOW.FOLLOW_FAIL;
@@ -43,14 +45,17 @@ const Following = ({
 
       setIsFollowing(true);
     } else {
-      // const resp = await apis.unfollow_user(username);
-      // const { result, status: { message } } = resp.data;
-
-      // success
+      const resp = await apis.unfollow_user(username);
       const {
         result,
         status: { message },
-      } = RESP.FOLLOW.UNFOLLOW_SUCCESS;
+      } = resp.data;
+
+      // success
+      // const {
+      //   result,
+      //   status: { message },
+      // } = RESP.FOLLOW.UNFOLLOW_SUCCESS;
 
       // fail
       // const { result, status: { message } } = RESP.FOLLOW.UNFOLLOW_FAIL;
@@ -70,23 +75,23 @@ const Following = ({
 
   return (
     <StListInfo>
-      <div className="flex_box">
+      <div className='flex_box'>
         <UserProfile userprofile={userprofile} />
-        <div className="info">
+        <div className='info'>
           <Username isme={false} username={username} />
-          <div className="f_box">
-            <div className="follow_g">
+          <div className='f_box'>
+            <div className='follow_g'>
               <div>Following {numfollowing}</div>
               <div>Followers {numfollowers}</div>
             </div>
             {isme && curr === "Followings" ? (
-              <div className="btn_flex">
+              <div className='btn_flex'>
                 {!isFollowing ? (
-                  <button type="button" onClick={toggleFollow}>
+                  <button type='button' onClick={toggleFollow}>
                     Unfollow
                   </button>
                 ) : (
-                  <button type="button" onClick={toggleFollow}>
+                  <button type='button' onClick={toggleFollow}>
                     Follow
                   </button>
                 )}
