@@ -6,12 +6,13 @@ const base = {
 };
 
 const api = axios.create({
-  baseURL: base.server_https,
-  // baseURL: base.server_https,
+  // baseURL: "https://sparta-omj.shop",
+  baseURL: base.server_http,
   headers: {
     "content-type": "application/json; charset=UTF-8",
     accept: "application/json,",
-    withCredentials: true,
+    // origin: "http://localhost:3000",
+    // withCredentials: true,
   },
 });
 
@@ -20,7 +21,7 @@ const api = axios.create({
 // 조건부 분기
 api.interceptors.request.use(function (config) {
   const auth = localStorage.getItem("AccessToken");
-  config.headers.common["Authentication"] = auth;
+  config.headers.common["Authorization"] = auth;
 
   // const accessToken = document.cookie.split("=")[1];
   // const refreshToken = document.cookie.split("=")[1];
@@ -44,11 +45,12 @@ export const apis = {
   // post : CRUD, like/unlike
   // CRUD
   create_post: (content, files, hashtags) => {
-    // const contentBlob = new Blob([json], { type: "application/json" });
+    console.log(files);
     const formData = new FormData();
     formData.append("content", content);
     formData.append("files", files);
     formData.append("hashtags", hashtags);
+
     return api.post("/api/post", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
