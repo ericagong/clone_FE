@@ -217,6 +217,8 @@ const Post = ({
   //   }
   // };
 
+  console.log(ismine, username);
+
   return (
     <>
       {!isDeleted ? (

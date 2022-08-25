@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { apis } from "../../shared/axios";
-import RESP from "../../server/response";
+// import RESP from "../../server/response";
 import UserProfile from "../../elements/UserProfile";
 import Username from "../../elements/Username";
 import styled from "styled-components";

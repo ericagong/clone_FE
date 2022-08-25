@@ -27,6 +27,8 @@ const Posts = ({ onProfile, username, targetId }) => {
         output,
       } = resp.data;
 
+      console.log(resp);
+
       // console.log(`getPosts called!`);
       // console.log(`\t pageNum: ${currPageNum.current}`);
       // console.log(`\t pageLimit: ${pageLimit.current}`);
