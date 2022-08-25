@@ -143,26 +143,25 @@ const Post = ({
       return;
     }
 
-    console.log(message);
     setIsDeleted(true);
   };
 
   const submitForm = async ({ editContent }) => {
     const hashtags = parseHashtags(editContent);
 
-    // const resp = await apis.edit_post(id, editContent, hashtags);
-    // const {
-    //   result,
-    // 	status: { message },
-    // 	output
-    // } = resp.data;
-
-    // success
+    const resp = await apis.edit_post(id, editContent, hashtags);
     const {
       result,
       status: { message },
       output,
-    } = RESP.POST.EDIT_SUCCESS;
+    } = resp.data;
+
+    // success
+    // const {
+    //   result,
+    //   status: { message },
+    //   output,
+    // } = RESP.POST.EDIT_SUCCESS;
 
     // fail
     // const {
@@ -175,13 +174,10 @@ const Post = ({
     //   status: { message },
     // } = RESP.POST.EDIT_FAIL_AUTH;
 
-    // TODO
     if (!result) {
       alert(message);
       return;
     }
-
-    // TODO output 기반 store의 posts값 변경하기
 
     setInEdit((prev) => !prev);
     setCurrContent(editContent);
