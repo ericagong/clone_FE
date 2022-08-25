@@ -131,15 +131,7 @@ const Signup = (props) => {
                 },
               })}
             />
-            {!show ? (
-              <button type="button" onClick={onShowHandler}>
-                <FaEye className="icon" />
-              </button>
-            ) : (
-              <button type="button" onClick={onShowHandler}>
-                <FaEyeSlash className="icon" />
-              </button>
-            )}
+
             <div className="guide">
               Password should be length of 8 to 15, mixture of english letters,
               number and following special characters(@$!%*#?&).
@@ -165,6 +157,15 @@ const Signup = (props) => {
             {errors.passwordCheck ? (
               <div className="error">{errors.passwordCheck.message}</div>
             ) : null}
+            {!show ? (
+              <button type="button" onClick={onShowHandler}>
+                <FaEye className="icon" />
+              </button>
+            ) : (
+              <button type="button" onClick={onShowHandler}>
+                <FaEyeSlash className="icon" />
+              </button>
+            )}
           </div>
           <div className="signup_footer">
             <Link to={LOGIN_PATH}>
@@ -242,13 +243,31 @@ const StSignUp = styled.div`
       }
       .pw {
         margin-bottom: 8px;
-        position: relative;
+
         .pw_label {
           margin-bottom: 4px;
         }
         .guide {
           margin-top: 4px;
           font-size: 8px;
+        }
+        input {
+          width: 100%;
+          height: 30px;
+          outline: none;
+          border-radius: 8px;
+          padding: 0 5px;
+          border: 1px solid rgba(69, 79, 93, 0.4);
+          :focus {
+            border: 2px solid #a5c7fe;
+          }
+        }
+      }
+      .pwcheck {
+        margin-bottom: 8px;
+        position: relative;
+        label {
+          margin-bottom: 4px;
         }
         input {
           width: 93%;
@@ -275,23 +294,6 @@ const StSignUp = styled.div`
           top: 23px;
           right: 10px;
           .icon {
-          }
-        }
-      }
-      .pwcheck {
-        margin-bottom: 8px;
-        label {
-          margin-bottom: 4px;
-        }
-        input {
-          width: 100%;
-          height: 30px;
-          outline: none;
-          border-radius: 8px;
-          padding: 0 5px;
-          border: 1px solid rgba(69, 79, 93, 0.4);
-          :focus {
-            border: 2px solid #a5c7fe;
           }
         }
       }

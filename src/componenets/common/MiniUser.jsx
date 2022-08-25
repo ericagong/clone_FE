@@ -87,25 +87,25 @@ const MiniUser = () => {
 
   return (
     <StMiniUser>
-      <div className='profile_box'>
+      <div className="profile_box">
         <UserProfile userprofile={info.userprofile} />
         <Username isme={true} username={info.username} inPost={false} />
-        <button type='button' onClick={onLogoutHandler}>
+        <button type="button" onClick={onLogoutHandler}>
           Logout
         </button>
       </div>
-      <div className='info_box'>
-        <div className='info_item'>
-          <div className='title'>Posts</div>
-          <div className='total'>{info.numposts}</div>
+      <div className="info_box">
+        <div className="info_item">
+          <div className="title">Posts</div>
+          <div className="total">{info.numposts}</div>
         </div>
-        <div className='info_item'>
-          <div className='title'>Following</div>
-          <div className='total'>{info.numfollowing}</div>
+        <div className="info_item">
+          <div className="title">Following</div>
+          <div className="total">{info.numfollowing}</div>
         </div>
-        <div className='info_item'>
-          <div className='title'>Follwers</div>
-          <div className='total'>{info.numfollowers}</div>
+        <div className="info_item">
+          <div className="title">Follwers</div>
+          <div className="total">{info.numfollowers}</div>
         </div>
       </div>
     </StMiniUser>
@@ -115,7 +115,7 @@ const MiniUser = () => {
 export default MiniUser;
 
 const StMiniUser = styled.div`
-  width: 270px;
+  /* width: 270px; */
   box-shadow: rgb(0 0 0 / 23%) 3px 3px 8px 0px;
   .profile_box {
     height: 75px;
@@ -126,7 +126,6 @@ const StMiniUser = styled.div`
     padding: 5px 10px;
     button {
       height: 30px;
-      /* background-color: rgb(224, 224, 224); */
       background-color: #3da9fc;
       border: none;
       display: flex;

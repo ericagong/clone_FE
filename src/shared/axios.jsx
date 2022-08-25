@@ -74,7 +74,7 @@ export const apis = {
 
   get_comments: (postId, pageNum, pageLimit) =>
     api.get(
-      `/api/comments?postId=${postId}&pageNum=${pageNum}&pageLimit=${pageLimit}`
+      `/api/comments/postId=${postId}?pageNum=${pageNum}&pageLimit=${pageLimit}`
     ),
   edit_comment: (id, content, hashtags) =>
     api.put(`/api/comment/${id}`, { content, hashtags }),

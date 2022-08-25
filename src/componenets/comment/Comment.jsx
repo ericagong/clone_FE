@@ -8,6 +8,7 @@ import { FaRegEdit, FaTrashAlt } from "react-icons/fa";
 
 import UserProfile from "../../elements/UserProfile";
 import RESP from "../../server/response";
+import { apis } from "../../shared/axios";
 
 const Comment = ({ id, username, userprofile, ismine, content }) => {
   const isLogin = useSelector((state) => state.user.isLogin);
@@ -46,13 +47,20 @@ const Comment = ({ id, username, userprofile, ismine, content }) => {
   const submitForm = async ({ editContent }) => {
     //props 를 id, content, hashtags 줘야하는지
     const hashtags = parseHashtags(editContent);
-    // console.log(editContent);
+
+    const resp = await apis.edit_comment(id, content, hashtags);
 
     const {
       result,
       status: { message },
-      output,
-    } = RESP.COMMENT.EDIT_SUCCESS;
+    } = resp.data;
+
+    //success
+    // const {
+    //   result,
+    //   status: { message },
+    //   output,
+    // } = RESP.COMMENT.EDIT_SUCCESS;
 
     //fail
     // const {
@@ -76,10 +84,17 @@ const Comment = ({ id, username, userprofile, ismine, content }) => {
   };
 
   const clickDelete = async (id) => {
+    const resp = await apis.delete_comment(id);
     const {
       result,
       status: { message },
-    } = RESP.COMMENT.DELETE_SUCCESS;
+    } = resp.data;
+
+    // const {
+    //   result,
+    //   status: { message },
+    // } = RESP.COMMENT.DELETE_SUCCESS;
+
     //fail
     // const {
     //   result,
