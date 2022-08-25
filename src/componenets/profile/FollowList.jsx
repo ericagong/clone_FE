@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 
 import { apis } from "../../shared/axios";
-import RESP from "../../server/response";
+// import RESP from "../../server/response";
 import FollowInfo from "./FollowInfo";
 import styled from "styled-components";
 
@@ -10,7 +10,7 @@ const FollowList = ({ username, curr }) => {
   const [allFollowList, setAllFollowList] = useState([]);
   const [pageInfo, setPageInfo] = useState({
     currpage: 0,
-    totalpage: 1,
+    totalpage: 0,
     currcontent: 0,
     totalelements: 0,
     isme: false,
@@ -21,30 +21,30 @@ const FollowList = ({ username, curr }) => {
 
   const getFollowList = async () => {
     if (curr === "Followings") {
-      // const resp = await apis.get_profile_followings(
-      //   username,
-      //   pageNum,
-      //   pageLimit
-      // );
-      // const {
-      //   result,
-      //   status: { message },
-      //   output,
-      // } = resp.data;
-
-      // success
-      let resp = {};
-      if (username !== "") {
-        resp = RESP.PROFILE.GET_FOLLOWINGS_SUCCESS;
-      } else {
-        resp = RESP.PROFILE.GET_MY_FOLLOWINGS_SUCCESS;
-      }
-
+      const resp = await apis.get_profile_followings(
+        username || "",
+        currPageNum.current,
+        pageLimit.current
+      );
       const {
         result,
         status: { message },
         output,
-      } = resp;
+      } = resp.data;
+
+      // success
+      // let resp = {};
+      // if (username !== "") {
+      //   resp = RESP.PROFILE.GET_FOLLOWINGS_SUCCESS;
+      // } else {
+      //   resp = RESP.PROFILE.GET_MY_FOLLOWINGS_SUCCESS;
+      // }
+
+      // const {
+      //   result,
+      //   status: { message },
+      //   output,
+      // } = resp;
 
       // fail
       // const {
@@ -67,30 +67,30 @@ const FollowList = ({ username, curr }) => {
     }
     // curr === 'Followers'
     else {
-      // const resp = await apis.get_profile_followers(
-      //   username,
-      //   pageNum,
-      //   pageLimit
-      // );
-      // const {
-      //   result,
-      //   status: { message },
-      //   output,
-      // } = resp.data;
-
-      // success
-      let resp = {};
-      if (username !== "") {
-        resp = RESP.PROFILE.GET_FOLLOWERS_SUCCESS;
-      } else {
-        resp = RESP.PROFILE.GET_MY_FOLLOWERS_SUCCESS;
-      }
-
+      const resp = await apis.get_profile_followers(
+        username,
+        currPageNum.current,
+        pageLimit.current
+      );
       const {
         result,
         status: { message },
         output,
-      } = resp;
+      } = resp.data;
+
+      // success
+      // let resp = {};
+      // if (username !== "") {
+      //   resp = RESP.PROFILE.GET_FOLLOWERS_SUCCESS;
+      // } else {
+      //   resp = RESP.PROFILE.GET_MY_FOLLOWERS_SUCCESS;
+      // }
+
+      // const {
+      //   result,
+      //   status: { message },
+      //   output,
+      // } = resp;
 
       // fail
       // const {
@@ -109,6 +109,7 @@ const FollowList = ({ username, curr }) => {
 
       setAllFollowList((prev) => [...prev, ...followers]);
       setPageInfo({ ...pageInfo, ...rest });
+      currPageNum.current += 1;
     }
   };
 
@@ -129,14 +130,13 @@ const FollowList = ({ username, curr }) => {
     />
   ));
 
-  console.log(pageInfo.currpage, pageInfo.totalpage);
-
   return (
     <StFollow>
-      <div className="list_header">{`${pageInfo.totalelements} ${curr}`}</div>
-      <div className="list_body">{followingList}</div>
-      {pageInfo.currpage !== pageInfo.totalpage ? (
-        <button type="button" onClick={getMore} className="more">
+      <div className='list_header'>{`${pageInfo.totalelements} ${curr}`}</div>
+      <div className='list_body'>{followingList}</div>
+      {pageInfo.totalelements !== 0 &&
+      pageInfo.currpage !== pageInfo.totalpage ? (
+        <button type='button' onClick={getMore} className='more'>
           get more
         </button>
       ) : null}

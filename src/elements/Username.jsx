@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 // TODO 상대경로 사용해봤음. 트러블슈팅.
 const Username = ({ isme, username, inPost }) => {
-  // console.log(inPost);
+  console.log(isme, username);
   return (
     <StUserName inpost={inPost}>
       <Link

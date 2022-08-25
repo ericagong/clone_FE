@@ -5,7 +5,7 @@ import { FiX } from "react-icons/fi";
 import styled from "styled-components";
 
 import { apis } from "../../shared/axios";
-import RESP from "../../server/response";
+// import RESP from "../../server/response";
 import { parseHashtags, notEmptyCheck } from "../../shared/regex";
 import ImgView from "./ImgView";
 import UserProfile from "../../elements/UserProfile";
@@ -27,7 +27,6 @@ const Post = ({
   id,
   ...rest
 }) => {
-  // console.log("id :", id);
   const isLogin = useSelector((state) => state.user.isLogin);
 
   const [isFollowing, setIsFollowing] = useState(isfollowing);
@@ -52,17 +51,19 @@ const Post = ({
     setShowMore((prev) => !prev);
   };
 
-  // 서버에 요청만 보내고, 리렌더링 하지 않고 토글처리만 하기!
   const toggleFollow = async () => {
     if (!isFollowing) {
-      // const resp = await apis.follow_user(username);
-      // const { result, status: { message } } = resp.data;
-
-      // success
+      const resp = await apis.follow_user(username);
       const {
         result,
         status: { message },
-      } = RESP.FOLLOW.FOLLOW_SUCCESS;
+      } = resp.data;
+
+      // success
+      // const {
+      //   result,
+      //   status: { message },
+      // } = RESP.FOLLOW.FOLLOW_SUCCESS;
 
       // fail
       // const { result, status: { message } } = RESP.FOLLOW.FOLLOW_FAIL;
@@ -79,14 +80,17 @@ const Post = ({
       setIsFollowing(true);
       setShowMore((prev) => !prev);
     } else {
-      // const resp = await apis.unfollow_user(username);
-      // const { result, status: { message } } = resp.data;
-
-      // success
+      const resp = await apis.unfollow_user(username);
       const {
         result,
         status: { message },
-      } = RESP.FOLLOW.UNFOLLOW_SUCCESS;
+      } = resp.data;
+
+      // success
+      // const {
+      //   result,
+      //   status: { message },
+      // } = RESP.FOLLOW.UNFOLLOW_SUCCESS;
 
       // fail
       // const { result, status: { message } } = RESP.FOLLOW.UNFOLLOW_FAIL;
@@ -121,7 +125,13 @@ const Post = ({
     const {
       result,
       status: { message },
-    } = RESP.POST.DELETE_SUCCESS;
+    } = resp.data;
+
+    // success
+    // const {
+    //   result,
+    //   status: { message },
+    // } = RESP.POST.DELETE_SUCCESS;
 
     // fail
     // const {
@@ -180,7 +190,7 @@ const Post = ({
     setInEdit((prev) => !prev);
     setCurrContent(editContent);
   };
-
+  
   return (
     <>
       {!isDeleted ? (
@@ -212,7 +222,7 @@ const Post = ({
                 {showMore ? (
                   <div>
                     {!ismine && !isFollowing ? (
-                      <div className="option" onClick={toggleFollow}>
+                      <div className='option' onClick={toggleFollow}>
                         Follow this user
                       </div>
                     ) : null}

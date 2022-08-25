@@ -42,8 +42,8 @@ export const notEmptyCheck = (value) => {
 };
 
 export const parseHashtags = (value) => {
-  let regExp = /[#]+[A-Za-z0-9-_]+/g;
-  return value.match(regExp);
+  let regExp = /[#]+[A-Za-z0-9-_가-힇]+/g;
+  return value.match(regExp) || [];
 };
 
 // export const nickCheck = (nick) => {

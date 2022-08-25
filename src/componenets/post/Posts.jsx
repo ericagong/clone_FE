@@ -20,12 +20,13 @@ const Posts = ({ onProfile, username, targetId }) => {
   // TODO 코드 반복되는 부분 예쁘게 정리하기!
   const getPosts = async () => {
     if (!onProfile) {
-      const resp = await apis.get_posts(currPageNum.current, pageLimit.current);
+      let resp = await apis.get_posts(currPageNum.current, pageLimit.current);
       const {
         result,
         status: { message },
         output,
       } = resp.data;
+
 
       // console.log(`getPosts called!`);
       // console.log(`\t pageNum: ${currPageNum.current}`);
@@ -59,30 +60,34 @@ const Posts = ({ onProfile, username, targetId }) => {
       currPageNum.current += 1;
       hasMorePosts.current = rest.currpage !== rest.totalpage;
     } else {
-      // const resp = await apis.get_profile_posts(
-      //   username,
-      //   pageNum,
-      //   pageLimit
-      // );
-      // const {
-      //   result,
-      //   status: { message },
-      //   output,
-      // } = resp.data;
-
-      // success
-      let resp = {};
-      if (username !== "") {
-        resp = RESP.PROFILE.GET_POSTS_SUCCESS;
-      } else {
-        resp = RESP.PROFILE.GET_MY_POSTS_SUCCESS;
-      }
-
+      const resp = await apis.get_profile_posts(
+        username,
+        currPageNum.current,
+        pageLimit.current
+      );
       const {
         result,
         status: { message },
         output,
-      } = resp;
+      } = resp.data;
+
+      // console.log(`getPosts called!`);
+      // console.log(`\t pageNum: ${currPageNum.current}`);
+      // console.log(`\t pageLimit: ${pageLimit.current}`);
+
+      // success
+      // let resp = {};
+      // if (username !== "") {
+      //   resp = RESP.PROFILE.GET_POSTS_SUCCESS;
+      // } else {
+      //   resp = RESP.PROFILE.GET_MY_POSTS_SUCCESS;
+      // }
+
+      // const {
+      //   result,
+      //   status: { message },
+      //   output,
+      // } = resp;
 
       // fail
       // const {
