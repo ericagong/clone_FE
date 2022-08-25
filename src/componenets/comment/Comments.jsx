@@ -16,15 +16,24 @@ const Comments = (props) => {
   });
 
   const getComments = async (postId, pageNum, pageLimit) => {
-    // const resp = await apis.get_comments(postId, pageNum, pageLimit);
-    // const { result, statue:{message}, output} = resp.data
+    const resp = await apis.get_comments(postId, pageNum, pageLimit);
 
-    //success
     const {
       result,
-      status: { message },
+      statue: { message },
       output,
-    } = RESP.COMMENT.GET_SUCCESS;
+    } = resp.data;
+
+    console.log(`getComments called!`);
+    console.log(`\t pageNum: ${currPageNum.current}`);
+    console.log(`\t pageLimit: ${pageLimit.current}`);
+
+    //success
+    // const {
+    //   result,
+    //   status: { message },
+    //   output,
+    // } = RESP.COMMENT.GET_SUCCESS;
 
     //fail
     // const {
@@ -80,7 +89,7 @@ const Comments = (props) => {
 export default Comments;
 
 const StComments = styled.div`
-  /* background-color: pink; */
+  background-color: pink;
   width: 100%;
   .comments_header {
     margin-bottom: 5px;

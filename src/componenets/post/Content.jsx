@@ -149,6 +149,7 @@ export default Content;
 
 const StContent = styled.div`
   width: 100%;
+  /* background-color: pink; */
   .time {
     font-size: 10px;
     color: rgb(142, 142, 142);

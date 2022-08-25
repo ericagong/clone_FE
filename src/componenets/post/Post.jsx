@@ -190,58 +190,30 @@ const Post = ({
     setInEdit((prev) => !prev);
     setCurrContent(editContent);
   };
-
-  // comment C
-  // const submitCommentsForm = async ({ content }) => {
-  //   // const resp = await apis.create_comment(content, hashtags);
-  //   // const {
-  //   //   result,
-  //   // 	status: { message },
-  //   // } = resp.data;
-
-  //   //success
-  //   const {
-  //     result,
-  //     status: { message },
-  //   } = RESP.COMMENT.CREATE_SUCCESS;
-
-  //   //fail
-  //   // const{
-  //   //   result,
-  //   //   status:{message},
-  //   // } = RESP.COMMENT.CREATE_FAIL
-
-  //   if (!result) {
-  //     alert(message);
-  //     return;
-  //   }
-  // };
-
-  console.log(ismine, username);
-
+  
   return (
     <>
       {!isDeleted ? (
         <StPost>
-          <div className='wrap'>
-            <div className='post_user_info'>
-              <div className='user_flex'>
+          <div className="wrap">
+            <div className="post_user_info">
+              <div className="user_flex">
                 <UserProfile userprofile={userprofile} />
                 <Username isme={ismine} username={username} inPost={true} />
               </div>
-              <div className='showmore_btn'>
+              <div className="showmore_btn">
                 {isLogin ? (
                   <div>
                     {!showMore ? (
-                      <div className='more'>
-                        <div className='circle_box' onClick={toggleMore}>
-                          <div className='circle'></div>
-                          <div className='circle'></div>
-                          <div className='circle'></div>
+                      <div className="more">
+                        <div className="circle_box" onClick={toggleMore}>
+                          <div className="circle"></div>
+                          <div className="circle"></div>
+                          <div className="circle"></div>
                         </div>
                       </div>
                     ) : (
-                      <div onClick={toggleMore} className='close'>
+                      <div onClick={toggleMore} className="close">
                         <FiX />
                       </div>
                     )}
@@ -255,16 +227,16 @@ const Post = ({
                       </div>
                     ) : null}
                     {!ismine && isFollowing ? (
-                      <div className='option' onClick={toggleFollow}>
+                      <div className="option" onClick={toggleFollow}>
                         Unfollow this user
                       </div>
                     ) : null}
                     {ismine ? (
                       <div>
-                        <div className='option' onClick={toggleEdit}>
+                        <div className="option" onClick={toggleEdit}>
                           Edit
                         </div>
-                        <div className='option' onClick={clickDelete}>
+                        <div className="option" onClick={clickDelete}>
                           Delete
                         </div>
                       </div>
@@ -278,16 +250,16 @@ const Post = ({
               {imageurls.length !== 0 ? <ImgView imgUrls={imageurls} /> : null}
             </div>
 
-            <div className='post_user_box'></div>
-            <div className='content'>
+            <div className="post_user_box"></div>
+            <div className="content">
               {!inEdit ? (
                 <Content content={currContent} {...rest} time={time} id={id} />
               ) : (
                 <form onSubmit={handleSubmit(submitForm)}>
-                  <div className='input_box'>
+                  <div className="input_box">
                     <input
-                      type='text'
-                      id='editContent'
+                      type="text"
+                      id="editContent"
                       {...register("editContent", {
                         required: "You should write content to edit post.",
                         maxLength: {
@@ -303,12 +275,12 @@ const Post = ({
                       })}
                     />
                     {errors.editContent ? (
-                      <div className='error'>{errors.editContent.message}</div>
+                      <div className="error">{errors.editContent.message}</div>
                     ) : null}
                   </div>
-                  <div className='btn_group'>
-                    <button type='submit'>Save Post</button>
-                    <button type='button' onClick={toggleEdit}>
+                  <div className="btn_group">
+                    <button type="submit">Save Post</button>
+                    <button type="button" onClick={toggleEdit}>
                       Cancel
                     </button>
                   </div>

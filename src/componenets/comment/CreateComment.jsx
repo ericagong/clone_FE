@@ -6,8 +6,9 @@ import RESP from "../../server/response";
 import { parseHashtags } from "../../shared/regex";
 import styled from "styled-components";
 import { useNavigate, useMatch } from "react-router-dom";
+import { apis } from "../../shared/axios";
 
-const CreateComment = ({ id }) => {
+const CreateComment = ({ id, content }) => {
   const {
     register,
     handleSubmit,
@@ -22,21 +23,21 @@ const CreateComment = ({ id }) => {
   const navigate = useNavigate();
 
   const url = useMatch(`/detail/${id}`);
-  // console.log("url :", url);
+
   const submitForm = async ({ CreateComments }) => {
-    // const resp = await apis.create_comment(content, hashtags);
-    // const {
-    //   result,
-    // 	status: { message },
-    // } = resp.data;
-    // console.log(CreateComments);
     const hashtags = parseHashtags(CreateComments);
 
-    //success
+    const resp = await apis.create_comment(id, content, hashtags);
     const {
       result,
       status: { message },
-    } = RESP.COMMENT.CREATE_SUCCESS;
+    } = resp.data;
+
+    //success
+    // const {
+    //   result,
+    //   status: { message },
+    // } = RESP.COMMENT.CREATE_SUCCESS;
 
     //fail
     // const{
