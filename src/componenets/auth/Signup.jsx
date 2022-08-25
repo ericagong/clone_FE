@@ -5,7 +5,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 import { LOGIN_PATH } from "../../shared/paths";
 import { apis } from "../../shared/axios";
-import RESP from "../../server/response";
+// import RESP from "../../server/response";
 import { emailCheck, usernameCheck, pwCheck } from "../../shared/regex";
 import styled from "styled-components";
 
@@ -110,7 +110,6 @@ const Signup = (props) => {
           </div>
           <div className="pw">
             <label htmlFor="password">password</label>
-
             <input
               type={!show ? "password" : "text"}
               id="password"
@@ -145,7 +144,6 @@ const Signup = (props) => {
               Password should be length of 8 to 15, mixture of english letters,
               number and following special characters(@$!%*#?&).
             </div>
-
             {errors.password ? (
               <div className="error">{errors.password.message}</div>
             ) : null}

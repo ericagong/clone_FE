@@ -8,6 +8,7 @@ import SearchBar from "../../elements/SearchBar";
 import UserProfile from "../../elements/UserProfile";
 import { useEffect, useState } from "react";
 
+// TODO header check 
 const Header = () => {
   const isLogin = useSelector((state) => state.user.isLogin);
 
@@ -42,7 +43,7 @@ const Header = () => {
     // const {
     //   result,
     //   status: { message },
-    // 	output,
+    //    output,
     // } = RESP.PROFILE.GET_INFO_FAIL;
 
     if (!result) {

@@ -6,12 +6,13 @@ const base = {
 };
 
 const api = axios.create({
+  // baseURL: "https://sparta-omj.shop",
   baseURL: base.server_http,
-  // baseURL: base.server_https,
   headers: {
     "content-type": "application/json; charset=UTF-8",
     accept: "application/json,",
-    withCredentials: true,
+    // origin: "http://localhost:3000",
+    // withCredentials: true,
   },
 });
 
@@ -20,7 +21,7 @@ const api = axios.create({
 // 조건부 분기
 api.interceptors.request.use(function (config) {
   const auth = localStorage.getItem("AccessToken");
-  config.headers.common["Authentication"] = auth;
+  config.headers.common["Authorization"] = auth;
 
   // const accessToken = document.cookie.split("=")[1];
   // const refreshToken = document.cookie.split("=")[1];
@@ -44,11 +45,13 @@ export const apis = {
   // post : CRUD, like/unlike
   // CRUD
   create_post: (content, files, hashtags) => {
-    // const contentBlob = new Blob([json], { type: "application/json" });
     const formData = new FormData();
     formData.append("content", content);
-    formData.append("files", files);
     formData.append("hashtags", hashtags);
+    for (let i = 0; i < files.length; i++) {
+      formData.append("files", files[i]);
+    }
+
     return api.post("/api/post", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
@@ -57,44 +60,32 @@ export const apis = {
   },
   get_posts: (pageNum, pageLimit) =>
     api.get(`/api/posts?pageNum=${pageNum}&pageLimit=${pageLimit}`),
-  edit_post: (id, content, hashtags) => {
-    api.put(`/api/post/${id}`, { content, hashtags });
-  },
-  delete_post: (id) => {
-    api.delete(`/api/post/${id}`);
-  },
+  edit_post: (id, content, hashtags) =>
+    api.put(`/api/post/${id}`, { content, hashtags }),
+  delete_post: (id) => api.delete(`/api/post/${id}`),
   // like, unlike
-  like_post: (id) => {
-    api.post(`/api/like/${id}`);
-  },
-  unlike_post: (id) => {
-    api.post(`/api/unlike/${id}`);
-  },
+  like_post: (id) => api.post(`/api/like/${id}`),
+  unlike_post: (id) => api.post(`/api/unlike/${id}`),
 
   // comment : CRUD
   create_comment: (id, content, hashtags) =>
     // TODO  create에 Blob 써보기
     api.post(`/api/comment/${id}`, { content, hashtags }),
+
   get_comments: (postId, pageNum, pageLimit) =>
     api.get(
       `/api/comments?postId=${postId}&pageNum=${pageNum}&pageLimit=${pageLimit}`
     ),
-  edit_comment: (id, content, hashtags) => {
-    api.put(`/api/comment/${id}`, { content, hashtags });
-  },
-  delete_comment: (id) => {
-    api.delete(`/api/comment/${id}`);
-  },
+  edit_comment: (id, content, hashtags) =>
+    api.put(`/api/comment/${id}`, { content, hashtags }),
+  delete_comment: (id) => api.delete(`/api/comment/${id}`),
 
   // search : search result
-  get_search_result: (tag, pageNum, pageLimit) => {
-    api.get(`/api/hashtag/${tag}&pageNum=${pageNum}&pageLimit=${pageLimit}`);
-  },
+  get_search_result: (tag, pageNum, pageLimit) =>
+    api.get(`/api/hashtag/${tag}&pageNum=${pageNum}&pageLimit=${pageLimit}`),
 
   // rank : hashtag ranking
-  get_rank: () => {
-    api.get("api/hashtag/rank");
-  },
+  get_rank: () => api.get("api/hashtag/rank"),
 
   // profile : get info, posts, following, follower list
   get_profile_info: (username) => api.get(`/api/profile/info/${username}`),
@@ -112,10 +103,6 @@ export const apis = {
     ),
 
   // follow : follow/unfollow
-  follow_user: (username) => {
-    api.post(`api/user/follow`, { username });
-  },
-  unfollow_user: (username) => {
-    api.post(`api/user/unfollow`, { username });
-  },
+  follow_user: (username) => api.post(`api/user/follow`, { username }),
+  unfollow_user: (username) => api.post(`api/user/unfollow`, { username }),
 };

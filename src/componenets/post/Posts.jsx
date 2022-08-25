@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-// import { apis } from "../../shared/axios";
+import { apis } from "../../shared/axios";
 import RESP from "../../server/response";
 import Post from "./Post";
 
@@ -19,22 +19,25 @@ const Posts = ({ onProfile, username, targetId }) => {
 
   // TODO 코드 반복되는 부분 예쁘게 정리하기!
   const getPosts = async () => {
-    // TODO 전역 axios 가 프라미스 반환하게 바꾸거나, 아니면 then으로 변경해야함.
-
     if (!onProfile) {
-      // const resp = await apis.get_posts(pageNum, pageLimit);
-      // const { result, status: { message }, output } = resp.data;
-
-      // console.log(`getPosts called!`);
-      // console.log(`\t pageNum: ${currPageNum.current}`);
-      // console.log(`\t pageLimit: ${pageLimit}`);
-
-      // success
+      const resp = await apis.get_posts(currPageNum.current, pageLimit.current);
       const {
         result,
         status: { message },
         output,
-      } = RESP.POST.GET_SUCCESS;
+      } = resp.data;
+
+      console.log(`getPosts called!`);
+      console.log(`\t pageNum: ${currPageNum.current}`);
+      console.log(`\t pageLimit: ${pageLimit.current}`);
+
+      console.log(resp);
+      // success
+      // const {
+      //   result,
+      //   status: { message },
+      //   output,
+      // } = RESP.POST.GET_SUCCESS;
 
       // fail
       // const {
@@ -116,7 +119,7 @@ const Posts = ({ onProfile, username, targetId }) => {
       const shouldCall =
         window.scrollY + document.documentElement.clientHeight >
         document.documentElement.scrollHeight - threshold;
-      if (shouldCall) {
+      if (shouldCall && hasMorePosts.current) {
         getPosts();
       }
     };
@@ -125,7 +128,7 @@ const Posts = ({ onProfile, username, targetId }) => {
     return () => {
       window.removeEventListener("scroll", onScorll);
     };
-  }, []);
+  }, [getPosts]);
 
   // const postList = allPosts.map((post) => <Post key={post.id} {...post} />);
 

@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import styled from "styled-components";
 
-// import { apis } from "../../shared/axios";
-import RESP from "../../server/response";
+import { apis } from "../../shared/axios";
+// import RESP from "../../server/response";
 import { logout } from "../../modules/redux/user";
 import UserProfile from "../../elements/UserProfile";
 import Username from "../../elements/Username";
-import styled from "styled-components";
 
 // TODO check cookie issue after axios connection.
 const MiniUser = () => {
@@ -21,23 +21,19 @@ const MiniUser = () => {
   const dispatch = useDispatch();
 
   const getProfileInfo = async () => {
-    // const resp = await apis.get_profile_info("");
-    // const {
-    //   result,
-    //   status: { message },
-    //   username,
-    //   userprofile,
-    //   numposts,
-    //   numfollowing,
-    //   numfollowers,
-    // } = resp.data;
-
-    // // success
+    const resp = await apis.get_profile_info("");
     const {
       result,
       status: { message },
       output,
-    } = RESP.PROFILE.GET_INFO_SUCCESS;
+    } = resp.data;
+
+    // // success
+    // const {
+    //   result,
+    //   status: { message },
+    //   output,
+    // } = RESP.PROFILE.GET_INFO_SUCCESS;
 
     // fail
     // const {
@@ -62,23 +58,27 @@ const MiniUser = () => {
   }, []);
 
   const onLogoutHandler = async () => {
-    // const resp = await apis.logout();
-    // const {
-    //   result,
-    //   status: { message },
-    // } = resp.data;
-
-    // success
+    const resp = await apis.logout();
     const {
       result,
       status: { message },
-    } = RESP.AUTH.LOGOUT_SUCCESS;
+    } = resp.data;
+
+    // success
+    // const {
+    //   result,
+    //   status: { message },
+    // } = RESP.AUTH.LOGOUT_SUCCESS;
 
     // fail
     // const {
     //   result,
     //   status: { message },
     // } = RESP.AUTH.LOGOUT_FAIL;
+
+    if (!result) {
+      alert(message);
+    }
 
     dispatch(logout());
 
@@ -87,25 +87,25 @@ const MiniUser = () => {
 
   return (
     <StMiniUser>
-      <div className="profile_box">
+      <div className='profile_box'>
         <UserProfile userprofile={info.userprofile} />
         <Username isme={true} username={info.username} inPost={false} />
-        <button type="button" onClick={onLogoutHandler}>
+        <button type='button' onClick={onLogoutHandler}>
           Logout
         </button>
       </div>
-      <div className="info_box">
-        <div className="info_item">
-          <div className="title">Posts</div>
-          <div className="total">{info.numposts}</div>
+      <div className='info_box'>
+        <div className='info_item'>
+          <div className='title'>Posts</div>
+          <div className='total'>{info.numposts}</div>
         </div>
-        <div className="info_item">
-          <div className="title">Following</div>
-          <div className="total">{info.numfollowing}</div>
+        <div className='info_item'>
+          <div className='title'>Following</div>
+          <div className='total'>{info.numfollowing}</div>
         </div>
-        <div className="info_item">
-          <div className="title">Follwers</div>
-          <div className="total">{info.numfollowers}</div>
+        <div className='info_item'>
+          <div className='title'>Follwers</div>
+          <div className='total'>{info.numfollowers}</div>
         </div>
       </div>
     </StMiniUser>
