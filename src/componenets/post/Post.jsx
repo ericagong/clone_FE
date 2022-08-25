@@ -119,8 +119,8 @@ const Post = ({
     setInEdit((prev) => !prev);
   };
 
-  const clickDelete = async () => {
-    const resp = await apis.delete_post(id);
+  const clickDelete = () => {
+    const resp = apis.delete_post(id);
     const {
       result,
       status: { message },
