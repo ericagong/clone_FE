@@ -6,8 +6,8 @@ const base = {
 };
 
 const api = axios.create({
-  // baseURL: "https://sparta-omj.shop",
-  baseURL: base.server_http,
+  baseURL: "https://sparta-omj.shop",
+  // baseURL: base.server_http,
   headers: {
     "content-type": "application/json; charset=UTF-8",
     accept: "application/json,",

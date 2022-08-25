@@ -16,6 +16,7 @@ import styled from "styled-components";
 // TODO content hashtag Link
 // TODO code spliting!
 const Post = ({
+  id,
   userprofile,
   imageurls,
   username,
@@ -27,12 +28,6 @@ const Post = ({
   ...rest
 }) => {
   const isLogin = useSelector((state) => state.user.isLogin);
-
-  const [isFollowing, setIsFollowing] = useState(isfollowing);
-  const [showMore, setShowMore] = useState(false);
-  const [inEdit, setInEdit] = useState(false);
-  const [currContent, setCurrContent] = useState(content);
-  const [isDeleted, setIsDeleted] = useState(false);
 
   const {
     register,
@@ -46,6 +41,12 @@ const Post = ({
     },
   });
 
+  const [isFollowing, setIsFollowing] = useState(isfollowing);
+  const [showMore, setShowMore] = useState(false);
+  const [inEdit, setInEdit] = useState(false);
+  const [currContent, setCurrContent] = useState(content);
+  const [isDeleted, setIsDeleted] = useState(false);
+
   const toggleMore = () => {
     if (!isLogin) {
       alert("Sorry. Only logged in user can see more.");
@@ -55,7 +56,6 @@ const Post = ({
     setShowMore((prev) => !prev);
   };
 
-  // 서버에 요청만 보내고, 리렌더링 하지 않고 토글처리만 하기!
   const toggleFollow = async () => {
     if (!isFollowing) {
       // const resp = await apis.follow_user(username);
@@ -119,20 +119,18 @@ const Post = ({
     setInEdit((prev) => !prev);
   };
 
-  // TODO store값 변경 안해주고 그냥 프론트 독단으로 처리해도 되는지?
   const clickDelete = async () => {
-    // const resp = await apis.delete_post(id);
-    // const {
-    //   result,
-    // 	status: { message },
-    // } = resp.data;
-
-    // success
-
+    const resp = await apis.delete_post(id);
     const {
       result,
       status: { message },
-    } = RESP.POST.DELETE_SUCCESS;
+    } = resp.data;
+
+    // success
+    // const {
+    //   result,
+    //   status: { message },
+    // } = RESP.POST.DELETE_SUCCESS;
 
     // fail
     // const {
@@ -151,11 +149,10 @@ const Post = ({
       return;
     }
 
-    // TODO output 기반 store의 posts값 변경하기?
+    console.log(message);
     setIsDeleted(true);
   };
 
-  // TODO store값 변경 안해주고 그냥 프론트 독단으로 처리해도 되는지?
   const submitForm = async ({ editContent }) => {
     const hashtags = parseHashtags(editContent);
 
@@ -256,6 +253,7 @@ const Post = ({
               {!inEdit ? (
                 <Content
                   content={currContent}
+                  id={id}
                   {...rest}
                   time={time}
                   goDetail={true}
