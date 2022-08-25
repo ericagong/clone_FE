@@ -12,13 +12,10 @@ const CreateComment = ({ id, content }) => {
   const {
     register,
     handleSubmit,
-    // reset,
     formState: { errors },
   } = useForm({
     mode: "onChange",
   });
-
-  // console.log("postid:", postsid);
 
   const navigate = useNavigate();
 
