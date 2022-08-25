@@ -45,7 +45,6 @@ export const apis = {
   // post : CRUD, like/unlike
   // CRUD
   create_post: (content, files, hashtags) => {
-    // const contentBlob = new Blob([json], { type: "application/json" });
     const formData = new FormData();
     formData.append("content", content);
     formData.append("files", files);

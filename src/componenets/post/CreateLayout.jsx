@@ -5,12 +5,11 @@ import { FaPaperclip } from "react-icons/fa";
 import { IoIosClose } from "react-icons/io";
 
 import { apis } from "../../shared/axios";
-import RESP from "../../server/response";
+// import RESP from "../../server/response";
 import { parseHashtags, notEmptyCheck } from "../../shared/regex";
 import ImgView from "./ImgView";
 import styled from "styled-components";
 
-// TODO change to 정사각형
 const CreateLayout = (props) => {
   const {
     register,
@@ -23,13 +22,7 @@ const CreateLayout = (props) => {
 
   const navigate = useNavigate();
 
-  // TODO blob 알아보기
   const submitForm = async ({ content, files }) => {
-    // const contentBlob = new Blob([json], { type: "application/json" });
-    // const formData = new FormData();
-    // formData.append("content", content);
-    // formData.append("files", files);
-
     const hashtags = parseHashtags(content);
 
     const resp = await apis.create_post(content, files, hashtags);
@@ -82,6 +75,7 @@ const CreateLayout = (props) => {
 
   const onClickClose = () => {
     setIsLoading(true);
+    setFileUrls([]);
   };
 
   return (
@@ -127,7 +121,6 @@ const CreateLayout = (props) => {
             <IoIosClose className='x_btn' onClick={onClickClose} />
           </div>
         ) : null}
-
         {!isLoading ? <ImgView imgUrls={fileUrls} /> : null}
       </form>
     </StCreate>
