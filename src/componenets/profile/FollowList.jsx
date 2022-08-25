@@ -10,7 +10,7 @@ const FollowList = ({ username, curr }) => {
   const [allFollowList, setAllFollowList] = useState([]);
   const [pageInfo, setPageInfo] = useState({
     currpage: 0,
-    totalpage: 1,
+    totalpage: 0,
     currcontent: 0,
     totalelements: 0,
     isme: false,
@@ -18,7 +18,6 @@ const FollowList = ({ username, curr }) => {
 
   const currPageNum = useRef(1);
   const pageLimit = useRef(5);
-  const hasMoreInfo = useRef(true);
 
   const getFollowList = async () => {
     if (curr === "Followings") {
@@ -135,7 +134,8 @@ const FollowList = ({ username, curr }) => {
     <StFollow>
       <div className='list_header'>{`${pageInfo.totalelements} ${curr}`}</div>
       <div className='list_body'>{followingList}</div>
-      {pageInfo.currpage !== pageInfo.totalpage ? (
+      {pageInfo.totalelements !== 0 &&
+      pageInfo.currpage !== pageInfo.totalpage ? (
         <button type='button' onClick={getMore} className='more'>
           get more
         </button>
