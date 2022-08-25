@@ -124,9 +124,6 @@ const Signup = (props) => {
               },
             })}
           />
-          <button type='button' onClick={onShowHandler}>
-            show
-          </button>
           {errors.password ? <div>{errors.password.message}</div> : null}
         </div>
         <div>
@@ -145,6 +142,9 @@ const Signup = (props) => {
           {errors.passwordCheck ? (
             <div>{errors.passwordCheck.message}</div>
           ) : null}
+          <button type='button' onClick={onShowHandler}>
+            show
+          </button>
         </div>
         <button type='submit'>Sign up</button>
       </form>

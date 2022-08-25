@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { FiX } from "react-icons/fi";
+import styled from "styled-components";
 
 import { apis } from "../../shared/axios";
 import RESP from "../../server/response";
@@ -10,9 +11,7 @@ import ImgView from "./ImgView";
 import UserProfile from "../../elements/UserProfile";
 import Username from "../../elements/Username";
 import Content from "./Content";
-import styled from "styled-components";
 
-// edit delete
 // TODO content hashtag Link
 // TODO code spliting!
 const Post = ({
@@ -47,11 +46,6 @@ const Post = ({
   });
 
   const toggleMore = () => {
-    if (!isLogin) {
-      alert("Sorry. Only logged in user can see more.");
-      return;
-    }
-
     setShowMore((prev) => !prev);
   };
 
@@ -120,8 +114,8 @@ const Post = ({
   };
 
 
-  const clickDelete = () => {
-    const resp = apis.delete_post(id);
+  const clickDelete = async () => {
+    const resp = await apis.delete_post(id);
     const {
       result,
       status: { message },
@@ -144,7 +138,6 @@ const Post = ({
       return;
     }
 
-    // TODO output 기반 store의 posts값 변경하기?
     setIsDeleted(true);
   };
 
@@ -152,19 +145,19 @@ const Post = ({
   const submitForm = async ({ editContent }) => {
     const hashtags = parseHashtags(editContent);
 
-    // const resp = await apis.edit_post(id, editContent, hashtags);
-    // const {
-    //   result,
-    // 	status: { message },
-    // 	output
-    // } = resp.data;
-
-    // success
+    const resp = await apis.edit_post(id, editContent, hashtags);
     const {
       result,
       status: { message },
       output,
-    } = RESP.POST.EDIT_SUCCESS;
+    } = resp.data;
+
+    // success
+    // const {
+    //   result,
+    //   status: { message },
+    //   output,
+    // } = RESP.POST.EDIT_SUCCESS;
 
     // fail
     // const {
@@ -177,13 +170,10 @@ const Post = ({
     //   status: { message },
     // } = RESP.POST.EDIT_FAIL_AUTH;
 
-    // TODO
     if (!result) {
       alert(message);
       return;
     }
-
-    // TODO output 기반 store의 posts값 변경하기
 
     setInEdit((prev) => !prev);
     setCurrContent(editContent);
@@ -200,19 +190,23 @@ const Post = ({
                 <Username isme={ismine} username={username} inPost={true} />
               </div>
               <div className='showmore_btn'>
-                {!showMore ? (
-                  <div className='more'>
-                    <div className='circle_box' onClick={toggleMore}>
-                      <div className='circle'></div>
-                      <div className='circle'></div>
-                      <div className='circle'></div>
-                    </div>
+                {isLogin ? (
+                  <div>
+                    {!showMore ? (
+                      <div className='more'>
+                        <div className='circle_box' onClick={toggleMore}>
+                          <div className='circle'></div>
+                          <div className='circle'></div>
+                          <div className='circle'></div>
+                        </div>
+                      </div>
+                    ) : (
+                      <div onClick={toggleMore} className='close'>
+                        <FiX />
+                      </div>
+                    )}
                   </div>
-                ) : (
-                  <div onClick={toggleMore} className='close'>
-                    <FiX />
-                  </div>
-                )}
+                ) : null}
                 {showMore ? (
                   <div>
                     {!ismine && !isFollowing ? (
