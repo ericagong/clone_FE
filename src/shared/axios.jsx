@@ -95,14 +95,16 @@ export const apis = {
     ),
   get_profile_followings: (username, pageNum, pageLimit) =>
     api.get(
-      `/api/profile/following?username=${username}pageNum=${pageNum}&pageLimit=${pageLimit}`
+      `/api/profile/following?username=${username}&pageNum=${pageNum}&pageLimit=${pageLimit}`
     ),
   get_profile_followers: (username, pageNum, pageLimit) =>
     api.get(
-      `/api/profile/followers?username=${username}pageNum=${pageNum}&pageLimit=${pageLimit}`
+      `/api/profile/followers?username=${username}&pageNum=${pageNum}&pageLimit=${pageLimit}`
     ),
 
   // follow : follow/unfollow
   follow_user: (username) => api.post(`api/user/follow`, { username }),
-  unfollow_user: (username) => api.post(`api/user/unfollow`, { username }),
+  // TODO delete 요청
+  unfollow_user: (username) =>
+    api.delete(`api/user/unfollow`, { data: { username } }),
 };
