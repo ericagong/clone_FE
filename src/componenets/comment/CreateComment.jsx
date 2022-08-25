@@ -24,8 +24,8 @@ const CreateComment = ({ id, content }) => {
 
   const url = useMatch(`/detail/${id}`);
 
-  const submitForm = async ({ CreateComments }) => {
-    const hashtags = parseHashtags(CreateComments);
+  const submitForm = async ({ content }) => {
+    const hashtags = parseHashtags(content);
 
     const resp = await apis.create_comment(id, content, hashtags);
     const {
@@ -58,11 +58,11 @@ const CreateComment = ({ id, content }) => {
     <StCreateComment>
       {url === null ? (
         <form onSubmit={handleSubmit(submitForm)}>
-          <div className="input_box">
+          <div className='input_box'>
             <input
-              type="text"
-              id="CreateComments"
-              {...register("CreateComments", {
+              type='text'
+              id='content'
+              {...register("content", {
                 required: "You should write Comments to upload comments.",
                 maxLength: {
                   value: 1000,
@@ -71,10 +71,10 @@ const CreateComment = ({ id, content }) => {
               })}
             />
 
-            <button type="submit">posting</button>
+            <button type='submit'>posting</button>
           </div>
           {errors.CreateComments ? (
-            <div className="error">{errors.CreateComments.message}</div>
+            <div className='error'>{errors.CreateComments.message}</div>
           ) : null}
         </form>
       ) : null}

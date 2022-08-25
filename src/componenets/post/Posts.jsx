@@ -116,7 +116,7 @@ const Posts = ({ onProfile, username, targetId }) => {
       return;
     }
     getPosts();
-  }, [getPosts]);
+  }, []);
 
   useEffect(() => {
     const onScorll = () => {
