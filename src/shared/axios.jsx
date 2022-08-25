@@ -60,6 +60,7 @@ export const apis = {
   },
   get_posts: (pageNum, pageLimit) =>
     api.get(`/api/posts?pageNum=${pageNum}&pageLimit=${pageLimit}`),
+  get_post: (id) => api.get(`/api/post/${id}`),
   edit_post: (id, content, hashtags) =>
     api.put(`/api/post/${id}`, { content, hashtags }),
   delete_post: (id) => api.delete(`/api/post/${id}`),

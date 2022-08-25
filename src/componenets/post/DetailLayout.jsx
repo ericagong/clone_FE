@@ -1,13 +1,14 @@
-import { useParams } from "react-router-dom";
-
-import Posts from "./Posts";
+// import { useParams } from "react-router-dom";
+import Detail from "./Detail";
+// import Posts from "./Posts";
 
 const DetailLayout = (props) => {
-  const { id } = useParams();
+  // const { id } = useParams();
 
   return (
     <>
-      <Posts targetId={id} />
+      <Detail />
+      {/* <Posts targetId={id} /> */}
     </>
   );
 };

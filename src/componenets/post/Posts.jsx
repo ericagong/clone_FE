@@ -135,14 +135,16 @@ const Posts = ({ onProfile, username, targetId }) => {
     };
   }, [getPosts]);
 
-  // const postList = allPosts.map((post) => <Post key={post.id} {...post} />);
+  const postList = allPosts.map((post) => <Post key={post.id} {...post} />);
 
-  const postList =
-    targetId === undefined
-      ? allPosts.map((post) => <Post key={post.id} {...post} />)
-      : allPosts
-          .filter((post) => post.id === parseInt(targetId))
-          .map((post) => <Post key={post.id} {...post} goDetail={true} />);
+  // console.log(allPosts);
+
+  // const postList =
+  //   targetId === undefined
+  //     ? allPosts.map((post) => <Post key={post.id} {...post} />)
+  //     : allPosts
+  //         .filter((post) => post.id === parseInt(targetId))
+  //         .map((post) => <Post key={post.id} {...post} goDetail={true} />);
 
   return (
     <>
