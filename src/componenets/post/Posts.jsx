@@ -5,7 +5,7 @@ import RESP from "../../server/response";
 import Post from "./Post";
 
 // TODO check hasMorePosts!
-const Posts = ({ onProfile, username, targetId, goInfo }) => {
+const Posts = ({ onProfile, username, targetId }) => {
   const [allPosts, setAllPosts] = useState([]);
   const currPageNum = useRef(1);
   const pageLimit = useRef(5);

@@ -1,7 +1,7 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 
-import { apis } from "../../shared/axios";
+// import { apis } from "../../shared/axios";
 import RESP from "../../server/response";
 import { logout } from "../../modules/redux/user";
 import UserProfile from "../../elements/UserProfile";
@@ -9,7 +9,7 @@ import Username from "../../elements/Username";
 import styled from "styled-components";
 
 // TODO check cookie issue after axios connection.
-const MiniUser = (props) => {
+const MiniUser = () => {
   const [info, setInfo] = useState({
     username: "",
     userprofile: "",
@@ -124,23 +124,21 @@ const StMiniUser = styled.div`
     justify-content: space-between;
     align-items: center;
     padding: 5px 10px;
-    /* margin-bottom: 5px; */
     button {
-      width: 55px;
       height: 30px;
-      background-color: rgb(224, 224, 224);
+      /* background-color: rgb(224, 224, 224); */
+      background-color: #3da9fc;
       border: none;
       display: flex;
       justify-content: center;
       align-items: center;
-      border-radius: 7px;
+      border-radius: 4px;
       cursor: pointer;
-      padding: 0 5px;
-      font-size: 14px;
       transition: all 0.4s;
       :hover {
-        background-color: #737171;
-        color: #fff;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+          rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+          rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
       }
     }
   }

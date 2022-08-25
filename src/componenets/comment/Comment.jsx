@@ -99,27 +99,28 @@ const Comment = ({ id, username, userprofile, ismine, content }) => {
   };
 
   // console.log(inEdit);
+
   return (
     <StCommentWrap>
       {!isDeleted ? (
-        <div className='card'>
+        <div className="card">
           {ismine ? (
             <StComment>
               <UserProfile userprofile={userprofile}></UserProfile>
-              <div className='wrap'>
-                <div className='userinfowrap'>
-                  <div className='username'>{username}</div>
-                  <div className='comment_content'>
+              <div className="wrap">
+                <div className="userinfowrap">
+                  <div className="username">{username}</div>
+                  <div className="comment_content">
                     {!inEdit ? (
-                      <div className='curr_comment'>{currComment}</div>
+                      <div className="curr_comment">{currComment}</div>
                     ) : (
-                      <div className='what'>
+                      <div className="what">
                         <form onSubmit={handleSubmit(submitForm)}>
-                          <div className='ed_input_box'>
+                          <div className="ed_input_box">
                             <input
-                              type='text'
-                              id='editContent'
-                              className='ed_input'
+                              type="text"
+                              id="editContent"
+                              className="ed_input"
                               {...register("editContent", {
                                 required:
                                   "You should write comment to edit post.",
@@ -136,17 +137,17 @@ const Comment = ({ id, username, userprofile, ismine, content }) => {
                               })}
                             />
 
-                            <div className='ed_button_group'>
-                              <button className='ed_option'>save</button>
+                            <div className="ed_button_group">
+                              <button className="ed_option">save</button>
                               <button
                                 onClick={toggleEdit}
-                                className='ed_option'
+                                className="ed_option"
                               >
                                 cancel
                               </button>
                             </div>
                             {errors.editContent ? (
-                              <div className='error'>
+                              <div className="error">
                                 {errors.editContent.message}
                               </div>
                             ) : null}
@@ -157,10 +158,10 @@ const Comment = ({ id, username, userprofile, ismine, content }) => {
                   </div>
                 </div>
                 {!showBtn ? null : (
-                  <div className='btnbox'>
-                    <FaRegEdit onClick={toggleEdit} className='comment_btn' />
+                  <div className="btnbox">
+                    <FaRegEdit onClick={toggleEdit} className="comment_btn" />
 
-                    <FaTrashAlt className='comment_btn' onClick={clickDelete} />
+                    <FaTrashAlt className="comment_btn" onClick={clickDelete} />
                   </div>
                 )}
               </div>
@@ -168,10 +169,10 @@ const Comment = ({ id, username, userprofile, ismine, content }) => {
           ) : (
             <StNotMineComment>
               <UserProfile userprofile={userprofile}></UserProfile>
-              <div className='NM_wrap'>
-                <div className='NM_userinfowrap'>
-                  <div className='NM_username'>{username}</div>
-                  <div className='NM_content'>{currComment}</div>
+              <div className="NM_wrap">
+                <div className="NM_userinfowrap">
+                  <div className="NM_username">{username}</div>
+                  <div className="NM_content">{currComment}</div>
                 </div>
               </div>
             </StNotMineComment>
@@ -204,16 +205,13 @@ const StComment = styled.div`
     display: flex;
     justify-content: space-between;
     position: relative;
-    /* background-color: pink; */
     .userinfowrap {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      /* background-color: tomato; */
       .username {
         height: 28px;
         font-weight: bold;
-        /* background-color: royalblue; */
       }
       .comment_content {
         width: 400px;
@@ -222,28 +220,26 @@ const StComment = styled.div`
         border-radius: 8px;
         border: 1px solid rgba(0, 0, 0, 0.23);
         color: rgb(142, 142, 142);
-        /* background-color: pink; */
         .what {
-          /* background-color: red; */
-          /* width: 500px;
-          height: 300px; */
           form {
             width: 400px;
-            /* display: block; */
-            /* background-color: red; */
             .curr_comment {
-              /* width: 100%; */
               background-color: yellowgreen;
             }
             .ed_input_box {
               position: relative;
+
               .ed_input {
-                width: 400px;
+                width: 97%;
                 border: none;
                 outline: none;
                 padding: 0;
                 color: rgb(142, 142, 142);
                 overflow: hidden;
+                /* background-color: tomato; */
+                :focus {
+                  border: 2px solid #a5c7fe;
+                }
               }
               .ed_button_group {
                 position: absolute;
@@ -299,7 +295,6 @@ const StNotMineComment = styled.div`
     display: flex;
     justify-content: space-between;
     position: relative;
-    /* background-color: pink; */
     .NM_userinfowrap {
       display: flex;
       flex-direction: column;

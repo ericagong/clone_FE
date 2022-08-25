@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styled from "styled-components";
 
 import Posts from "../post/Posts";
 import FollowList from "./FollowList";
@@ -14,8 +15,8 @@ const Content = ({ username }) => {
   };
 
   return (
-    <>
-      <div>
+    <StPorfileContent>
+      <div className="category">
         <button type="button" id="Posts" onClick={clickCategory}>
           Posts
         </button>
@@ -37,8 +38,27 @@ const Content = ({ username }) => {
           <FollowList username={username} curr={curr} />
         ) : null}
       </div>
-    </>
+    </StPorfileContent>
   );
 };
 
 export default Content;
+const StPorfileContent = styled.div`
+  .category {
+    border-top: 1px solid #000;
+    padding: 10px 10px;
+    display: flex;
+    justify-content: space-between;
+    button {
+      width: calc((100% - 20px) / 3);
+      outline: none;
+      border: none;
+      background-color: #eee;
+      border: 1px solid rgba(69, 79, 93, 0.15);
+      border-radius: 7px;
+      :hover {
+        background-color: #ddd;
+      }
+    }
+  }
+`;

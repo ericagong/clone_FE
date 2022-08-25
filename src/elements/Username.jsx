@@ -11,7 +11,6 @@ const Username = ({ isme, username, inPost }) => {
         style={{ textDecoration: "none", display: "block" }}
       >
         <StuserName inpost={inPost}>{username}</StuserName>
-
       </Link>
     </StUserName>
   );
@@ -19,7 +18,6 @@ const Username = ({ isme, username, inPost }) => {
 
 export default Username;
 const StUserName = styled.div`
-
   /* .name {
     font-size: 35px;
     font-weight: bold;
@@ -31,6 +29,11 @@ const StUserName = styled.div`
 const StuserName = styled.div`
   font-size: ${(props) => (!props.inpost ? "35px" : "20px")};
   font-weight: bold;
-  color: #262626;
+  color: #ccc;
+  color: ${(props) => (!props.inpost ? "#ccc" : "#333")};
   line-height: 46px;
+  transition: all 0.4s;
+  :hover {
+    color: rgb(175, 172, 172);
+  }
 `;

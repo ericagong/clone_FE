@@ -62,43 +62,43 @@ const Login = (props) => {
   return (
     <StLogin>
       <form onSubmit={handleSubmit(onSubmitHandler)}>
-        <div className='input_box'>
-          <label htmlFor='email' className='email'>
+        <div className="input_box">
+          <label htmlFor="email" className="email">
             <FaUser />
           </label>
           <input
-            type='text'
-            id='email'
-            placeholder='UserEmail'
+            type="text"
+            id="email"
+            placeholder="UserEmail"
             {...register("email", {
               required: "You should write email.",
             })}
           />
         </div>
         {errors.email ? (
-          <div className='error'>{errors.email.message}</div>
+          <div className="error">{errors.email.message}</div>
         ) : null}
-        <div className='input_box'>
-          <label htmlFor='password' className='pw'>
+        <div className="input_box">
+          <label htmlFor="password" className="pw">
             <FaKey />
           </label>
           <input
-            type='password'
-            id='password'
-            placeholder='Password'
+            type="password"
+            id="password"
+            placeholder="Password"
             {...register("password", {
               required: "You should write password",
             })}
           />
         </div>
         {errors.password ? (
-          <div className='error'>{errors.password.message}</div>
+          <div className="error">{errors.password.message}</div>
         ) : null}
-        <div className='login_box'>
+        <div className="login_box">
           <Link to={SIGNUP_PATH}>
             <div>Sign up</div>
           </Link>
-          <button type='submit'>Login</button>
+          <button type="submit">Login</button>
         </div>
       </form>
     </StLogin>
@@ -113,6 +113,7 @@ const StLogin = styled.div`
   align-items: center;
   .error {
     font-size: 13px;
+    color: red;
   }
   .input_box {
     width: 210px;
@@ -132,6 +133,9 @@ const StLogin = styled.div`
       font-size: 23px;
       text-align: center;
       line-height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       svg {
         fill: #a6a6a6;
       }
@@ -158,17 +162,19 @@ const StLogin = styled.div`
     button {
       width: 55px;
       height: 30px;
-      background-color: rgb(224, 224, 224);
+      background-color: #3da9fc;
       border: none;
       display: flex;
       justify-content: center;
       align-items: center;
-      border-radius: 7px;
+      border-radius: 4px;
+      transition: all 0.4s;
       cursor: pointer;
       transition: all 0.4s;
       :hover {
-        background-color: #393838;
-        color: #fff;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+          rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+          rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
       }
     }
   }
