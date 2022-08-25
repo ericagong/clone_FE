@@ -1,13 +1,12 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaPaperclip } from "react-icons/fa";
+// import { FaPaperclip } from "react-icons/fa";
 import { IoIosClose } from "react-icons/io";
 import styled from "styled-components";
 
 import { apis } from "../../shared/axios";
 // import RESP from "../../server/response";
-import { HOME_PATH } from "../../shared/paths";
 import { parseHashtags, notEmptyCheck } from "../../shared/regex";
 import ImgView from "./ImgView";
 
@@ -57,7 +56,7 @@ const CreateLayout = (props) => {
 
     // reset({ content: "", files: [] });
     alert(message);
-    navigate(`${HOME_PATH}`);
+    navigate("/home");
   };
 
   const changeImg = async (e) => {
